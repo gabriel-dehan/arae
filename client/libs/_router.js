@@ -1,0 +1,45 @@
+ClientRouter = Backbone.Router.extend({
+    routes: {
+        ""                 :       "default_route",
+        ":route/"          :       "get_route",
+        ":route"           :       "get_route",
+        ":route/:action"   :       "get_route",
+        ":route/:action/"  :       "get_route"
+    },
+
+    /* Default route */
+    default_route: function() {
+        Meteor.navigate('/user/list');
+    },
+
+    /* Generic routes */
+    get_route: function( route, action ) {
+        var args, query;
+       if ( action ) {
+           args   = action.split('?');
+           query  = args[1];
+           action = args[0];
+       }
+
+        Meteor.request.setController(route);
+        Meteor.request.setAction(action);
+        Meteor.request.setQuery(query);
+    },
+
+    /* Every time a route is called we set it in the Session */
+    initialize: function() {
+        this.bind("all", function() {
+            Session.set('route', Backbone.history.fragment);
+        });
+    }
+});
+
+var Router = new ClientRouter;
+Backbone.history.start({pushState: true});
+
+Meteor.startup(function() {
+    $('body').on('click', 'a[data-link="internal"]', function(e){
+        e.preventDefault();
+        Meteor.navigate($(this).attr('href'));
+    });
+})

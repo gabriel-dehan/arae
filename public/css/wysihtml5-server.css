@@ -1,0 +1,45 @@
+/*
+    =TOC
+
+    GENERAL
+    TITLE
+    MESSAGE
+    LOGIN
+*/
+
+/* =GENERAL */
+body {
+    padding-top: 60px;
+}
+
+
+/* =TITLE */
+h1.page-header {
+    margin-top: 0;
+}
+
+/* =MESSAGE */
+#message {
+    margin-top: -23px;
+}
+
+#message .label {
+    padding: 10px 10px 10px;
+    font-size: 1.4em;
+}
+
+/* =LOGIN */
+#login {
+    float: left;
+    width: 300px;
+}
+
+#login input[type="text"], #login input[type="password"] {
+    float: left;
+    width: 100%;
+}
+
+#login_submit {
+    float: left;
+    width: 50%;
+}
