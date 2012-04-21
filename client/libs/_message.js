@@ -1,17 +1,15 @@
 Meteor.message = {};
 
 Meteor.message.set = function(message, type) {
-    var m = {
-            text  : message,
-            class : type
-        }
-    _Session.insert({key : 'message', value : m});
-    Session.set('message', m);
+    Session.set('message', {
+                text  : message,
+                class : type
+            });
+    Session.set('has_message', true);
 }
 
 Meteor.message.get = function() {
-    /* When ever we get a message, we delete it from the Permanent Session */
-    _Session.remove({key: 'message'});
+    Session.set('has_message', false);
     return Session.get('message');
 }
 
@@ -21,8 +19,7 @@ Meteor.message.has_one = function() {
 }
 
 Meteor.message.flush = function() {
-    session_message = _Session.findOne({key:'message'});
-    if ( session_message ) {
-        Session.set('message', session_message.value );
+    if ( !Session.get('has_message') ) {
+        Session.set('message', undefined );
     }
 }
