@@ -35,8 +35,14 @@ ClientRouter = Backbone.Router.extend({
 });
 
 var Router = new ClientRouter;
+
+/* Starts the backbone history, and thus the Router */
 Backbone.history.start({pushState: true});
 
+/*
+ * After DOM is loaded we bind the click event on internal links to call the Meteor.navigate method
+ * (This way we don't reload the session and fully use the backbone routing)
+ */
 Meteor.startup(function() {
     $('body').on('click', 'a[data-link="internal"]', function(e){
         e.preventDefault();
