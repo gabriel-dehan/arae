@@ -26,7 +26,7 @@ if ( Meteor.is_server ) {
                 User.insert(
                     {
                         name : user.name,
-                        pass : user.pass,
+                        pass : md5(user.pass),
                         document_id : user.document_id
                     }
                 );
