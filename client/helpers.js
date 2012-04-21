@@ -1,5 +1,6 @@
 /**
  * Get the page title
+ * @return {string} formated string
  */
 Handlebars.registerHelper('page_title', function() {
     return Meteor.view.replace('_', ' ').capitalize();
@@ -7,6 +8,7 @@ Handlebars.registerHelper('page_title', function() {
 
 /**
  *  Loads the template according to the route
+ *  @return {string} HTML String
  */
 Handlebars.registerHelper('content', function(){
     /* This does nothing but triggers the Meteor.ui.chunk HTML automatic update on route change */
@@ -17,6 +19,7 @@ Handlebars.registerHelper('content', function(){
 
 /**
  *  Checks if the required Template exists, and if not, get the error template
+ *  @return {string} Template name
  */
 Meteor.get_template = function() {
     Meteor.view = Meteor.request.controller;

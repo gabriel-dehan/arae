@@ -1,4 +1,9 @@
 Meteor.methods({
+    /**
+     * Allows user connexion through Meteor.call
+     * @param {string} name User name
+     * @param {string} pass User password (MD5 hash)
+     */
     login: function( name, pass ) {
         var user = User.findOne({name:name});
 

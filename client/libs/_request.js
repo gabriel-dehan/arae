@@ -1,3 +1,9 @@
+/**
+ * Request Class
+ * @property {string} controller The current request controller
+ * @property {string} action     The current request action
+ * @property {string} query      The current request query
+ */
 var Request = Base.extend({
     constructor: function() {
     },
