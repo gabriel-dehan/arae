@@ -3,6 +3,8 @@ ClientRouter = Backbone.Router.extend({
         ""                 :       "default_route",
         ":route/"          :       "get_route",
         ":route"           :       "get_route",
+        "tree/id-:id"      :       "get_tree",
+        "tree/id-:id/"     :       "get_tree",
         ":route/:action"   :       "get_route",
         ":route/:action/"  :       "get_route"
     },
@@ -12,8 +14,17 @@ ClientRouter = Backbone.Router.extend({
         Meteor.navigate('/user/list');
     },
 
+    /* DocumentTree routes */
+    get_tree: function( id ) {
+
+        Meteor.request.setController('tree');
+        Meteor.request.setAction(null);
+        Meteor.request.pushParam('id', id);
+        Session.set('tree_id', id);
+    },
+
     /* Generic routes */
-    get_route: function( route, action ) {
+    get_route: function( route, action, id ) {
         var args, query;
        if ( action ) {
            args   = action.split('?');
