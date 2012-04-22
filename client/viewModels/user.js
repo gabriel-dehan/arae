@@ -2,10 +2,6 @@
  * User modelView
  */
 
-/* =Model subscription */
-User = new Meteor.Collection("user");
-Meteor.subscribe("all_users");
-
 /* =User list */
 /**
  * Return all users
@@ -24,8 +20,9 @@ Template.user_list.capitalize = function( string ) {
     return string.capitalize();
 }
 
-/* =User login events */
-Template.user_login.events = {
+
+/* =Login events */
+Template.login.events = {
     'click #login_submit': function(e){
         e.preventDefault();
 
