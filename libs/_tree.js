@@ -29,7 +29,7 @@ var Tree = Base.extend({
         });
     },
 
-    parse: function(depth, tree){
+    display: function(depth, tree){
         var name = '';
         var that = this;
         if ( tree === undefined ) tree = that.tree;
@@ -50,15 +50,28 @@ var Tree = Base.extend({
                 that.parse(depth + 1, node.tree);
             }
         });
+    },
+
+    to_html: function(depth, tree, result){
+        var name = '';
+        var that = this;
+        if ( tree   === undefined ) tree = that.tree;
+        if ( result === undefined ) result = '<ul id="root">';
+
+        _.each(tree, function(node){
+            result += '<li>';
+
+            if ( node.is_dir ) {
+                result += '<span class="dir-name">' + node.name + '/</span>';
+                result += '<ul class="dir">';
+                result = that.parse(depth + 1, node.tree, result);
+                result += '</ul>';
+            } else {
+                result += '<span class="file-name">' + node.name + '</span>';
+            }
+            result += '</li>';
+        });
+
+        return result + '</ul>';
     }
 });
-
-/*Repository = new Tree;
-Repository.insert({
-    is_dir: 0,
-    name   : 'leaf9.txt',
-    _id    : 8
-}, 7);
-Repository.delete(2);
-Repository.parse(0);
-*/
