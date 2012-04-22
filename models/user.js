@@ -7,17 +7,17 @@ if ( Meteor.is_server ) {
                 {
                     name : 'admin',
                     pass : 'password',
-                    tree_id : 'b821420a-a139-4fe8-8ea2-761b1c0338ec'
+                    tree_id : 'aa3330cd-6823-4c11-87e2-a8c0519df2d0'
                 },
                 {
                     name : 'nicolas',
                     pass : 'nicolas',
-                    tree_id : 'b821420a-a139-4fe8-8ea2-761b1c0338ec'
+                    tree_id : 'aa3330cd-6823-4c11-87e2-a8c0519df2d0'
                 },
                 {
                     name : 'gabriel',
                     pass : 'gabriel',
-                    tree_id : 'b821420a-a139-4fe8-8ea2-761b1c0338ec'
+                    tree_id : 'aa3330cd-6823-4c11-87e2-a8c0519df2d0'
                 }
             ]
             _.each(users, function(user) {

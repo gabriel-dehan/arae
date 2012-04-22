@@ -4,10 +4,11 @@ Meteor.publish("all_users", function() {
     });
 });
 
-Meteor.publish("server_session", function() {
+Meteor.publish("_session", function() {
     return _Session.find();
 });
 
 Meteor.publish("document_tree", function(id) {
-    return DocumentTree.findOne({_id:id});
+//    return DocumentTree.findOne({_id:id});
+    return DocumentTree.find();
 });
