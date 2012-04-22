@@ -1,7 +1,8 @@
 <template name="message">
     {{#with message}}
     <div id="message">
-        <p class="label label-{{class}}">
+        <p class="alert alert-{{class}}">
+            <i class="close">&times;</i>
             <span class="information">{{text}}<br /></span>
         </p>
     </div>
