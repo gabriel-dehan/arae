@@ -35,7 +35,7 @@ Template.login.events = {
                 Meteor.message.set(error.error + ': ' + error.reason, 'warning');
                 Meteor.navigate(Session.get('route'));
             } else {
-                Meteor.message.set('Vous voici connect&eacute;, ' + user.name + '.', 'info');
+                Meteor.message.set('You are now connected, ' + user.name + '.', 'info');
                 Session.set('user', user);
                 Meteor.navigate(Session.get('route'));
             }
