@@ -33,11 +33,11 @@ Template.login.events = {
         Meteor.call('login', name, md5(pass), function(error, user){
             if ( error ) {
                 Meteor.message.set(error.error + ': ' + error.reason, 'warning');
-                Meteor.navigate('/user/list');
+                Meteor.navigate(Session.get('route'));
             } else {
                 Meteor.message.set('Vous voici connect&eacute;, ' + user.name + '.', 'info');
                 Session.set('user', user);
-                Meteor.navigate('/user/list');
+                Meteor.navigate(Session.get('route'));
             }
         });
     }
