@@ -15,3 +15,10 @@ String.prototype.trim = function(c) {
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
+
+/**
+ * Add the string to itself n times
+ * @param {number} n
+ * @return {string} New String
+ */
+String.prototype.times = function(n) { return (new Array(n+1)).join(this);};

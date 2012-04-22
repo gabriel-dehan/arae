@@ -47,3 +47,11 @@ Meteor.message.flush = function() {
     }
     return false;
 }
+
+
+
+
+
+
+
+

@@ -31,15 +31,114 @@ h1.page-header {
 /* =LOGIN */
 #login {
     float: left;
-    width: 300px;
+    width: 200px;
+}
+
+#login fieldset {
+    text-align: center;
 }
 
 #login input[type="text"], #login input[type="password"] {
     float: left;
-    width: 100%;
+    width: 94.5%;
 }
 
 #login_submit {
-    float: left;
     width: 50%;
+    margin-top: 8px;
 }
+
+#login_submit:hover {
+    -webkit-box-shadow: 0px 0px 15px 0px #57d8ff;
+    -moz-box-shadow: 0px 0px 15px 0px #57d8ff;
+    box-shadow: 0px 0px 15px 0px #57d8ff;
+    background-position: 0 0;
+}
+
+.informations {
+    color: white;
+    padding-bottom: 2px;
+}
+
+.logged, .login {
+    width: 100%;
+    margin-top: 11px;
+    margin-left: 20px;
+}
+
+.disconnect {
+    display: none;
+    margin-left: -25px;
+    padding: 8px;
+    padding-top: 8px;
+
+    background-color: #2C2C2C;
+    background-image: -moz-linear-gradient(top, #121212, #333);
+    background-image: -ms-linear-gradient(top, #121212, #333);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#121212), to(#333));
+    background-image: -webkit-linear-gradient(top, #121212, #333);
+    background-image: -o-linear-gradient(top, #121212, #333);
+    background-image: linear-gradient(top, #121212, #333);
+    background-repeat: repeat-x;
+
+    border: 1px solid gray;
+    border-top: none;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.disconnect a {
+    padding-left: 25px;
+    color: #00C0FF;
+}
+
+.disconnect a:hover {
+    text-decoration: none;
+    text-shadow: 1px 1px 10px #57d8ff;
+    filter: dropshadow(color=#57d8ff, offx=1, offy=1);
+
+ }
+
+.logged:hover .disconnect {
+    display: block;
+}
+
+.login {
+    width: auto;
+    display: none;
+    padding: 17px;
+    padding-bottom: 0;
+    padding-top: 15px;
+
+    background-color: #2C2C2C;
+    background-image: -moz-linear-gradient(top, #121212, #333);
+    background-image: -ms-linear-gradient(top, #121212, #333);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#121212), to(#333));
+    background-image: -webkit-linear-gradient(top, #121212, #333);
+    background-image: -o-linear-gradient(top, #121212, #333);
+    background-image: linear-gradient(top, #121212, #333);
+    background-repeat: repeat-x;
+
+    border: 1px solid gray;
+    border-top: none;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-left: -75px;
+}
+
+.connect {
+    color: white;
+    margin-top: 11px;
+    margin-left: 20px;
+
+}
+
+.log-me-in {
+    padding: 10px 10px 15px;
+}
+
+.connect:hover .login, .login:hover {
+    display: block;
+}
+
