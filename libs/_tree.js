@@ -1,6 +1,20 @@
 var Tree = Base.extend({
     constructor: function(tree) {
         this.tree = tree;
+        this.count = this.count_nodes(0);
+    },
+
+    count_nodes: function(count, tree) {
+        var that = this;
+        if ( tree === undefined ) tree = that.tree;
+
+        _.each(tree, function(node){
+            if ( node.is_dir ) {
+                count = that.count_nodes(count, node.tree);
+            }
+            count++;
+        });
+        return count;
     },
 
     insert: function(node_to_insert, node_id, tree){
@@ -9,10 +23,12 @@ var Tree = Base.extend({
 
         _.each(tree, function(node){
             if ( node.is_dir ) {
-                if ( node_id === node._id )
+                /* No strict equality as node_id can be a string */
+                if ( node_id == node._id ) {
                     node.tree.push(node_to_insert);
-                else if ( node.is_dir )
+                } else if ( node.is_dir ) {
                     that.insert(node_to_insert, node_id, node.tree);
+                }
             }
         });
     },
@@ -22,7 +38,7 @@ var Tree = Base.extend({
         if ( tree === undefined ) tree = that.tree;
 
         _.each(tree, function(node, i){
-            if ( node_id === node._id )
+            if ( node_id == node._id )
                 tree.remove(i);
             if ( node.is_dir )
                 that.delete(node_id, node.tree);
