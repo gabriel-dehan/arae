@@ -14,7 +14,7 @@
                     </ul>
                 </div>
                 <div class="pull-right">
-                    <ul class="nav">
+                    <ul class="nav" id="user-section {{#if is_logged}}logged{{/if}}">
                         <li><a href="/user/register" data-link="internal">Register</a></li>
                         {{#if is_logged}}
                         <li class="connected">
