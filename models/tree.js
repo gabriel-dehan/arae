@@ -3,12 +3,8 @@ var DocumentTree = new Meteor.Collection('tree');
 
 if ( Meteor.is_server ) {
     Meteor.startup(function() {
-//        var my_tree = DocumentTree.findOne();
-//        var repository = new Tree(my_tree.root);
-    //    repository.delete(4);
-    //    repository.parse(0);
-    //    console.log(my_tree._id);
 
+//        DocumentTree.remove({});
         if( DocumentTree.find().count() === 0 ) {
             var t = [
                 {
@@ -53,7 +49,8 @@ if ( Meteor.is_server ) {
                 }
             ];
 
-            DocumentTree.insert({root: t});
+            DocumentTree.insert({root: t, count:7});
+            console.log(DocumentTree.findOne());
         }
     });
 }

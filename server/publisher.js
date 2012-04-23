@@ -8,7 +8,6 @@ Meteor.publish("_session", function() {
     return _Session.find();
 });
 
-Meteor.publish("document_tree", function(id) {
-//    return DocumentTree.findOne({_id:id});
+Meteor.publish("document_tree", function() {
     return DocumentTree.find();
 });

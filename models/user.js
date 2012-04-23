@@ -2,22 +2,24 @@ User = new Meteor.Collection("user");
 
 if ( Meteor.is_server ) {
     Meteor.startup(function() {
+
+//        User.remove({});
         if( User.find().count() === 0 ) {
             var users = [
                 {
                     name : 'admin',
                     pass : 'password',
-                    tree_id : 'aa3330cd-6823-4c11-87e2-a8c0519df2d0'
+                    tree_id : DocumentTree.findOne()._id
                 },
                 {
                     name : 'nicolas',
                     pass : 'nicolas',
-                    tree_id : 'aa3330cd-6823-4c11-87e2-a8c0519df2d0'
+                    tree_id : DocumentTree.findOne()._id
                 },
                 {
                     name : 'gabriel',
                     pass : 'gabriel',
-                    tree_id : 'aa3330cd-6823-4c11-87e2-a8c0519df2d0'
+                    tree_id : DocumentTree.findOne()._id
                 }
             ]
             _.each(users, function(user) {
