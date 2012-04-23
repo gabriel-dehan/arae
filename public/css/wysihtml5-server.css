@@ -2,9 +2,15 @@
     =TOC
 
     GENERAL
+    HEADER
     TITLE
     MESSAGE
     LOGIN
+
+    TREE
+        TITLE
+        EDIT
+        DOCUMENT INFOS
 */
 
 /* =GENERAL */
@@ -12,7 +18,10 @@ body {
     padding-top: 60px;
 }
 
-
+/* =HEADER */
+.logged .informations i {
+    padding-right: 7px;
+}
 /* =TITLE */
 h1.page-header {
     margin-top: 0;
@@ -66,9 +75,13 @@ h1.page-header {
     margin-left: 20px;
 }
 
+#user-section .logged {
+    margin-right: 88px;
+}
+
 .disconnect {
     display: none;
-    margin-left: -25px;
+    margin-left: -10px;
     padding: 8px;
     padding-top: 8px;
 
@@ -88,7 +101,7 @@ h1.page-header {
     border-top-right-radius: 0;
 }
 .disconnect a {
-    padding-left: 25px;
+    padding-left: 10px;
     color: #00C0FF;
 }
 
@@ -124,7 +137,7 @@ h1.page-header {
     border-radius: 3px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    margin-left: -75px;
+    margin-left: -85px;
 }
 
 .connect {
@@ -142,3 +155,109 @@ h1.page-header {
     display: block;
 }
 
+/* =TREE */
+
+#tree-header {
+    clear: both;
+    margin-bottom: 5px;
+}
+
+.tree {
+    width: 75%;
+    float: left;
+    padding-bottom: 20px;
+}
+
+.tree .nav > li:hover {
+    text-decoration: none;
+    background-color: #EEE;
+}
+
+.tree .nav > .nav-header:hover {
+    background-color: transparent;
+}
+
+.tree .file-name a, .tree .dir-name a {
+    display: inline-block;
+}
+
+.tree .nav-list {
+    padding-right: 0;
+}
+
+/* ==TITLE */
+h1.title-tree {
+    padding-left: 28px;
+    color: #444;
+    width: 80%;
+    display: inline-block;
+}
+
+/* ==EDIT */
+.edit {
+    padding: 0 10px 0 0;
+    margin-right: 15px;
+    float: right;
+}
+
+.edit li {
+    list-style: none;
+    display: inline-block;
+    padding-left: 20px;
+    padding-top: 4px;
+}
+
+.edit li i {
+    padding-right: 5px;
+}
+
+.edit .rm-file, .edit .rm-dir, .edit .add-file, .edit .add-dir {
+    cursor: pointer;
+    color: #08C;
+}
+
+.edit .rm-file:hover, .edit .rm-dir:hover, .edit .add-file:hover, .edit .add-dir:hover {
+    color: #005580;
+}
+
+.edit .rm-file, .edit .rm-dir {
+    color: #BD362F;
+}
+
+.edit .rm-file:hover, .edit .rm-dir:hover {
+    color: #DA4F49;
+}
+
+/* =DOCUMENT INFOS */
+.document-infos {
+    width: 19%;
+    float: right;
+    text-align: center;
+    padding-top: 9px;
+}
+
+.document-infos #informations {
+    text-align: left;
+    float: left;
+    margin-bottom: 13px;
+}
+
+.document-infos .nav-header {
+    padding-bottom: 12px;
+}
+
+.document-infos strong {
+    display: inline-block;
+    width: 50%;
+    float: left;
+    padding-bottom: 2px;
+}
+
+.document-infos em {
+    display: inline-block;
+    float: right;
+    width: 50%;
+    text-align: right;
+    font-style: normal;
+    padding-bottom: 2px;
+}

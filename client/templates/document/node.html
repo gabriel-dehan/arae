@@ -1,0 +1,36 @@
+<template name="node">
+    {{#each node}}
+        {{#with parse this}}
+            {{#if is_dir}}
+                <li class="dir-name dir-{{_id}}">
+                    <a href="#{{_id}}">
+                        <i class="icon-folder-close"></i>
+                        {{name}}/
+                    </a>
+                    {{#if user_can_edit}}
+                        <ul class="edit" data-id="{{_id}}">
+                            <li class="add-file"><i class="icon-plus-sign"></i>New File</li>
+                            <li class="add-dir"><i class="icon-plus"></i>New Directory</li>
+                            <li class="rm-dir"><i class="icon-minus"></i>Delete</li>
+                        </ul>
+                     {{/if}}
+                </li>
+                <ul class="dir nav nav-list" id="{{_id}}">
+                    {{> node}}
+                </ul>
+            {{else}}
+                <li class="file-name">
+                    <a href="#{{_id}}">
+                        <i class="icon-file"></i>
+                        {{name}}
+                    </a>
+                    {{#if user_can_edit}}
+                        <ul class="edit" data-id="{{_id}}">
+                            <li class="rm-file"><i class="icon-minus-sign"></i>Delete</li>
+                        </ul>
+                    {{/if}}
+                </li>
+            {{/if}}
+        {{/with}}
+    {{/each}}
+</template>

@@ -1,7 +1,7 @@
 <template name="tree">
-    <header>
+    <header id="tree-header">
         <h1 class="title-tree">/</h1>
-        <button class="btn btn-danger">Delete all</button>
+        <button class="btn btn-danger pull-right">Delete all</button>
     </header>
     <div class="tree well well-small">
         <ul id="root" class="nav nav nav-list">
@@ -10,29 +10,11 @@
             {{> node}}
         </ul>
     </div>
-</template>
-
-<template name="node">
-    {{#each node}}
-        {{#with parse this}}
-            {{#if is_dir}}
-                <li class="dir-name">
-                    <a>
-                        <i class="icon-folder-close"></i>
-                        {{name}}/
-                    </a></li>
-                <ul class="dir nav nav-list" id="{{_id}}">
-                    {{#if user_can_edit}}penis{{/if}}
-                    {{> node}}
-                </ul>
-            {{else}}
-                <li class="file-name">
-                    <a>
-                        <i class="icon-file"></i>
-                        {{name}}
-                    </a>
-                </li>
-            {{/if}}
-        {{/with}}
-    {{/each}}
+    <div class="document-infos well">
+        <ul id="informations" class="nav nav nav-list">
+            <li class="nav-header">INFORMATIONS</li>
+            {{> doc_infos}}
+        </ul>
+        <img src="/img/file.png">
+    </div>
 </template>
