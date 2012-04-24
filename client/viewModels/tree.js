@@ -1,8 +1,13 @@
 var tree = null;
 
+/**
+ * Retrieve a node tree
+ */
 Template.node.node = function() {
+    /* If tree has not been defined, we get it from the database */
     if ( tree === undefined || tree === null ) {
         tree = DocumentTree.findOne({_id:Session.get('tree_id')});
+        /* We wait for tree to be defined ( Database can sometimes take a "while" to answer ) */
         if ( tree ) {
             tree = tree.root;
             Session.set('current_tree', tree);
@@ -15,6 +20,10 @@ Template.node.node = function() {
     }
 }
 
+/**
+ * Parse a node recursively
+ * @param node
+ */
 Template.node.parse = function(node) {
     if ( node.is_dir ) {
         tree = node.tree;
@@ -24,6 +33,9 @@ Template.node.parse = function(node) {
     }
 }
 
+/**
+ * Check if a user can edit a node
+ */
 Template.node.user_can_edit = function(node) {
     if ( Session.get('user') ) {
         return Session.get('user').tree_id === Session.get('tree_id');
@@ -32,11 +44,17 @@ Template.node.user_can_edit = function(node) {
     }
 }
 
+/**
+ * Reset the parsed tree
+ */
 Template.tree.init = function(){
     tree = null;
 }
 
 Template.tree.events = {
+    /*
+     * Add a file or directory
+     */
     'click .add-file, click .add-dir' : function(e){
         var parent_id = $(e.target).parent('ul.edit').attr('data-id');
         var is_dir    = $(e.target).hasClass('add-dir');
@@ -57,7 +75,10 @@ Template.tree.events = {
             }
         });
     },
- 
+
+    /*
+     * Remove a file or directory
+     */
     'click .rm-file, click .rm-dir' : function(e){
         var node_id = $(e.target).parent('ul.edit').attr('data-id');
 

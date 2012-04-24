@@ -4,6 +4,12 @@ var DocumentTree = new Meteor.Collection('tree');
 if ( Meteor.is_server ) {
     Meteor.startup(function() {
 
+//        tc = DocumentTree.findOne();
+//        t = new Tree(tc.root)
+//        console.log(t.tree);
+//        t.move(6, 1);
+//        console.log(t.tree);
+
 //        DocumentTree.remove({});
         if( DocumentTree.find().count() === 0 ) {
             var t = [

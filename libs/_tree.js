@@ -4,6 +4,11 @@ var Tree = Base.extend({
         this.count = this.count_nodes(0);
     },
 
+    /**
+     * Count recursively the nodes of a tree
+     * @param {number} count
+     * @param {object} tree
+     */
     count_nodes: function(count, tree) {
         var that = this;
         if ( tree === undefined ) tree = that.tree;
@@ -17,6 +22,12 @@ var Tree = Base.extend({
         return count;
     },
 
+    /**
+     * Insert a node into the tree
+     * @param node_to_insert
+     * @param node_id
+     * @param tree
+     */
     insert: function(node_to_insert, node_id, tree){
         var that = this;
         if ( tree === undefined ) tree = that.tree;
@@ -33,19 +44,45 @@ var Tree = Base.extend({
         });
     },
 
+    /**
+     * Delete a node from the tree
+     * @param node_id
+     * @param tree
+     * @return {object} deleted The deleted node
+     */
     delete: function(node_id, tree){
         var that = this;
+        var deleted = null;
         if ( tree === undefined ) tree = that.tree;
 
         _.each(tree, function(node, i){
-            if ( node_id == node._id )
+            /* No strict equality as node_id can be a string */
+            if ( node_id == node._id ) {
                 tree.remove(i);
+                deleted = node;
+            }
             if ( node.is_dir )
                 that.delete(node_id, node.tree);
         });
+        return deleted;
     },
 
-    display: function(depth, tree){
+    /**
+     * Move a node
+     * @param node_id
+     * @param destination_id
+     * @param tree
+     */
+    move: function(node_id, destination_id, tree){
+        this.insert( this.delete(node_id), destination_id );
+    },
+
+    /**
+     * Text display for a tree
+     * @param depth
+     * @param tree
+     */
+    text_display: function(depth, tree){
         var name = '';
         var that = this;
         if ( tree === undefined ) tree = that.tree;
@@ -68,6 +105,13 @@ var Tree = Base.extend({
         });
     },
 
+    /**
+     * Returns a HTML string representing the tree
+     * @param depth
+     * @param tree
+     * @param result
+     * @return {string} result HTML Representation of tree
+     */
     to_html: function(depth, tree, result){
         var name = '';
         var that = this;
