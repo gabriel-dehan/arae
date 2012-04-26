@@ -32,8 +32,13 @@ Meteor.methods({
             node.tree = [];
         }
 
-        t.insert(node, dir_id);
-        DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}, $inc : {count:1}});
+        if ( t.name_exists(node, dir_id) ) {
+            throw new Meteor.Error(200, 'name_exists');
+        } else {
+            t.insert(node, dir_id);
+            DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}, $inc : {count:1}});
+        }
+
         return true;
     },
 
@@ -50,9 +55,9 @@ Meteor.methods({
         var t = new Tree(tree);
 
         if ( t.node_exists(node_id, to) ) {
-            throw new Meteor.Error(200, 'name_exists');
-        } else if ( t.name_exists(name, to) ) {
             throw new Meteor.Error(200, 'node_exists');
+        } else if ( t.name_exists(node_id, to) ) {
+            throw new Meteor.Error(200, 'name_exists');
         } else {
             t.move(node_id, to);
             DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});

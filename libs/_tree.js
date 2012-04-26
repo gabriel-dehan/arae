@@ -109,12 +109,21 @@ var Tree = Base.extend({
      * @param name
      * @param node_id
      */
-    name_exists: function(name, node_id){
-        var directory = this.fetch_node( node_id );
-        var exists    = false;
+    name_exists: function(node_or_id, parent_id){
+        var _node;
+        if ( typeof node_or_id === 'object' )
+            _node = node_or_id;
+        else
+            _node = this.fetch_node( node_or_id );
+
+        var name  = _node.name,
+        is_dir    = _node.is_dir,
+        directory = this.fetch_node( parent_id ),
+        exists    = false;
+
         if ( directory.is_dir ) {
             _.each(directory.tree, function(node){
-                if( node.name === name ) {
+                if( ( name === node.name) && ( is_dir == node.is_dir )) {
                     exists = true;
                     return;
                 }

@@ -56,20 +56,22 @@ Template.tree.events = {
      * Add a file or directory
      */
     'click .add-file, click .add-dir' : function(e){
-        var parent_id = $(e.target).parent('ul.edit').attr('data-id');
-        var is_dir    = $(e.target).hasClass('add-dir');
+        var parent_id = $(e.target).parent('ul.edit').attr('data-id'),
+        is_dir        = $(e.target).hasClass('add-dir'),
+        name          = '';
 
         if ( is_dir ) {
-            var name = prompt('Directory name', 'New Directory');
+            name = prompt('Directory name', 'New Directory');
             is_dir = 1;
         } else {
-            var name = prompt('File name', 'New file');
+            name = prompt('File name', 'New file');
             is_dir = 0;
         }
 
         Meteor.call('insert_in_dir', Session.get('current_tree'), name, parent_id, Session.get('tree_id'), is_dir, function(error, result){
-            if ( error ) {
-                console.log(error);
+            if ( error && (error.reason === 'name_exists') ) {
+                Meteor.message.set('"' + name + '" already exists.', 'warning');
+                Meteor.navigate(Session.get('route'));
             } else {
                 Template.tree.init();
             }

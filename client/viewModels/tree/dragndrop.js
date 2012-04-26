@@ -106,7 +106,7 @@ function drop(e){
 
             Meteor.call('move_node', Session.get('current_tree'), name, id, destination, Session.get('tree_id'), function(error, result){
                 if ( error) {
-                    if ( error.reason === 'exists' ) {
+                    if ( error.reason === 'name_exists' ) {
                         Meteor.message.set('"' + name + '" already exists.', 'warning');
                     } else {
                         Meteor.message.set('Can not move "' + name + '" into its own directory.', 'warning');

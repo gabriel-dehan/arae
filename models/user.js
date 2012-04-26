@@ -30,7 +30,7 @@ if ( Meteor.is_server ) {
                         tree_id : user.tree_id
                     }
                 );
-            })
+            });
         }
     });
 }
