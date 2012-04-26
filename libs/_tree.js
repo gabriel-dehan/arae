@@ -61,9 +61,12 @@ var Tree = Base.extend({
                 tree.remove(i);
                 deleted = node;
             }
-            if ( node.is_dir )
-                that.delete(node_id, node.tree);
+            if ( node.is_dir ) {
+                /* If deleted has already been defined, we stop the recursion and return the result */
+                deleted = deleted ? deleted : that.delete(node_id, node.tree);
+            }
         });
+
         return deleted;
     },
 
@@ -93,7 +96,7 @@ var Tree = Base.extend({
         _.each(tree, function(node){
             name = '';
             if ( depth > 0 )
-                name += ' '.times(depth * 4)
+                name += ' '.times(depth * 4);
             name += node.name;
             if ( node.is_dir ) {
                 name += '/';

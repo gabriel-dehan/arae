@@ -26,10 +26,10 @@ Meteor.methods({
                             _id    : file_id,
                             is_dir : is_dir,
                             name   : name
-                      }
+                      };
 
         if ( is_dir ) {
-            node.tree = []
+            node.tree = [];
         }
 
         t.insert(node, dir_id);
@@ -44,5 +44,14 @@ Meteor.methods({
 
         DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
         return true;
+    },
+
+    move_node: function(tree, node_id, to, tree_id) {
+        var t = new Tree(tree);
+
+        t.move(node_id, to);
+        DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
+
+        return t.tree;
     }
 });

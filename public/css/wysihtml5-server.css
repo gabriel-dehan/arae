@@ -11,6 +11,7 @@
         TITLE
         EDIT
         DOCUMENT INFOS
+        DRAG & DROP
 */
 
 /* =GENERAL */
@@ -260,4 +261,23 @@ h1.title-tree {
     text-align: right;
     font-style: normal;
     padding-bottom: 2px;
+}
+
+/* =DRAG & DROP */
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.ondrag {
+    background-color: white !important;
+}
+
+.file-dragover {
+    border-top: 1px dashed #666;
+}
+.dir-dragover {
+    border-bottom: 1px dashed #666;
 }

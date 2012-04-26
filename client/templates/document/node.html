@@ -3,7 +3,7 @@
         {{#with parse this}}
             {{#if is_dir}}
                 <li class="dir-name dir-{{_id}}">
-                    <a href="#{{_id}}">
+                    <a href="#{{_id}}" {{#if user_can_edit}}draggable="true"{{/if}}>
                         <i class="icon-folder-close"></i>
                         {{name}}/
                     </a>
@@ -20,7 +20,7 @@
                 </ul>
             {{else}}
                 <li class="file-name">
-                    <a href="#{{_id}}">
+                    <a href="#{{_id}}" {{#if user_can_edit}}draggable="true"{{/if}}>
                         <i class="icon-file"></i>
                         {{name}}
                     </a>
