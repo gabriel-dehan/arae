@@ -2,6 +2,7 @@
  * Get the page title
  * @return {string} formated string
  */
+
 Handlebars.registerHelper('page_title', function() {
     return Meteor.view.replace('_', ' ').capitalize();
 });
@@ -13,7 +14,6 @@ Handlebars.registerHelper('page_title', function() {
 Handlebars.registerHelper('content', function(){
     /* This does nothing but triggers the Meteor.ui.chunk HTML automatic update on route change */
     Session.get('route');
-
     return Meteor.ui.chunk(Template[Meteor.get_template()]);
 });
 

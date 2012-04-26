@@ -21,7 +21,7 @@ if ( Meteor.is_server ) {
                     pass : 'gabriel',
                     tree_id : DocumentTree.findOne()._id
                 }
-            ]
+            ];
             _.each(users, function(user) {
                 User.insert(
                     {
