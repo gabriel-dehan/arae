@@ -46,11 +46,17 @@ Meteor.methods({
         return true;
     },
 
-    move_node: function(tree, node_id, to, tree_id) {
+    move_node: function(tree, name, node_id, to, tree_id) {
         var t = new Tree(tree);
 
-        t.move(node_id, to);
-        DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
+        if ( t.node_exists(node_id, to) ) {
+            throw new Meteor.Error(200, 'name_exists');
+        } else if ( t.name_exists(name, to) ) {
+            throw new Meteor.Error(200, 'node_exists');
+        } else {
+            t.move(node_id, to);
+            DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
+        }
 
         return t.tree;
     }

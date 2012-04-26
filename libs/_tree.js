@@ -15,7 +15,7 @@ var Tree = Base.extend({
 
         _.each(tree, function(node){
             if ( node.is_dir ) {
-                count = that.count_nodes(count, node.tree);
+                count = that.count_nodes( count, node.tree );
             }
             count++;
         });
@@ -36,9 +36,9 @@ var Tree = Base.extend({
             if ( node.is_dir ) {
                 /* No strict equality as node_id can be a string */
                 if ( node_id == node._id ) {
-                    node.tree.push(node_to_insert);
+                    node.tree.push( node_to_insert );
                 } else if ( node.is_dir ) {
-                    that.insert(node_to_insert, node_id, node.tree);
+                    that.insert( node_to_insert, node_id, node.tree );
                 }
             }
         });
@@ -63,7 +63,7 @@ var Tree = Base.extend({
             }
             if ( node.is_dir ) {
                 /* If deleted has already been defined, we stop the recursion and return the result */
-                deleted = deleted ? deleted : that.delete(node_id, node.tree);
+                deleted = deleted ? deleted : that.delete( node_id, node.tree );
             }
         });
 
@@ -78,6 +78,63 @@ var Tree = Base.extend({
      */
     move: function(node_id, destination_id, tree){
         this.insert( this.delete(node_id), destination_id );
+    },
+
+    /**
+     * Fetch a node
+     * @param node_id
+     * @param tree
+     */
+    fetch_node: function(node_id, tree) {
+        var that = this;
+        var _node = null;
+        if ( tree === undefined ) tree = that.tree;
+
+        _.each(tree, function(node){
+            /* No strict equality as node_id can be a string */
+            if ( node_id == node._id ) {
+                _node = node;
+            }
+            if ( node.is_dir ) {
+                /* If deleted has already been defined, we stop the recursion and return the result */
+                _node = _node ? _node : that.fetch_node( node_id, node.tree );
+            }
+        });
+
+        return _node;
+    },
+
+    /**
+     * Checks if node name already exists in the chosen node
+     * @param name
+     * @param node_id
+     */
+    name_exists: function(name, node_id){
+        var directory = this.fetch_node( node_id );
+        var exists    = false;
+        if ( directory.is_dir ) {
+            _.each(directory.tree, function(node){
+                if( node.name === name ) {
+                    exists = true;
+                    return;
+                }
+            });
+        }
+        return exists;
+    },
+
+    node_exists: function(node_id, parent_id){
+        var directory = this.fetch_node( parent_id );
+        var exists    = false;
+        if ( directory.is_dir ) {
+            _.each(directory.tree, function(node){
+                if( node._id == node_id ) {
+                    exists = true;
+                    return;
+                }
+            });
+        }
+        return exists;
     },
 
     /**
@@ -96,14 +153,14 @@ var Tree = Base.extend({
         _.each(tree, function(node){
             name = '';
             if ( depth > 0 )
-                name += ' '.times(depth * 4);
+                name += ' '.times( depth * 4 );
             name += node.name;
             if ( node.is_dir ) {
                 name += '/';
             }
             console.log(name);
             if ( node.is_dir ) {
-                that.parse(depth + 1, node.tree);
+                that.text_display( depth + 1, node.tree );
             }
         });
     },
@@ -127,7 +184,7 @@ var Tree = Base.extend({
             if ( node.is_dir ) {
                 result += '<span class="dir-name">' + node.name + '/</span>';
                 result += '<ul class="dir">';
-                result = that.parse(depth + 1, node.tree, result);
+                result = that.to_html( depth + 1, node.tree, result );
                 result += '</ul>';
             } else {
                 result += '<span class="file-name">' + node.name + '</span>';
