@@ -171,6 +171,8 @@ function drag_over(e){
 function drop(e){
     if (e.stopPropagation)
         e.stopPropagation();
+    else
+        e.cancelBubble = true;
 
     try {
         var that;
@@ -180,7 +182,6 @@ function drop(e){
         } else {
             that = this;
         }
-
 
         that = (that.classList.contains('file-name')) ? that.parentNode : that.nextElementSibling ;
 
@@ -192,7 +193,8 @@ function drop(e){
 
             var el = document.createElement('div');
             el.innerHTML = e.dataTransfer.getData('text/html');
-            that.appendChild(el.childNodes[1]);
+            /* /!\ We need to take the last element in 'el' because on Chrome the first element is a meta /!\ */
+            that.appendChild(el.childNodes[el.childNodes.length - 1]);
 
             Meteor.call('move_node', Session.get('current_tree'), id, destination, Session.get('tree_id'), function(error, result){
                 if ( error ) {
@@ -206,7 +208,6 @@ function drop(e){
             Meteor.navigate(Session.get('route'));
         }
     } catch(e) {
-        Message.set('You cannot move this file here.', 'warning');
         console.log(e);
     }
 
