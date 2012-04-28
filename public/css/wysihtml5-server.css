@@ -5,7 +5,11 @@
     HEADER
     TITLE
     MESSAGE
-    LOGIN
+
+    USER
+        LOGIN
+        REGISTER
+        LIST
 
     TREE
         TITLE
@@ -23,6 +27,11 @@ body {
 .logged .informations i {
     padding-right: 7px;
 }
+
+.connected {
+    margin-right: 68px;
+}
+
 /* =TITLE */
 h1.page-header {
     margin-top: 0;
@@ -38,7 +47,8 @@ h1.page-header {
     font-size: 1.4em;
 }
 
-/* =LOGIN */
+/* =USER */
+/* ==LOGIN */
 #login {
     float: left;
     width: 200px;
@@ -156,6 +166,24 @@ h1.page-header {
     display: block;
 }
 
+/* ==REGISTER */
+
+#register {
+    width: 280px;
+}
+
+.register_error {
+    border-color: rgba(241, 106, 94, 0.8);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(241, 106, 94, 0.6);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(241, 106, 94, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(241, 106, 94, 0.6);
+    outline: 0;
+    outline: thin dotted 9;
+}
+
+/* ==LIST */
+/* TODO: User list remove & follow td width */
+
 /* =TREE */
 
 #tree-header {
@@ -229,7 +257,7 @@ h1.title-tree {
     color: #DA4F49;
 }
 
-/* =DOCUMENT INFOS */
+/* ==DOCUMENT INFOS */
 .document-infos {
     width: 19%;
     float: right;
@@ -263,7 +291,7 @@ h1.title-tree {
     padding-bottom: 2px;
 }
 
-/* =DRAG & DROP */
+/* ==DRAG & DROP */
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;
