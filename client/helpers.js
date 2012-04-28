@@ -17,6 +17,19 @@ Handlebars.registerHelper('content', function(){
     return Meteor.ui.chunk(Template[Meteor.get_template()]);
 });
 
+Handlebars.registerHelper('is_user', function(){
+    return Session.get('user') !== undefined;
+});
+
+Handlebars.registerHelper('is_admin', function() {
+    /* TODO: Not really clean checking with the admin string... */
+    var user = Session.get('user');
+    if ( user ) {
+        return user.name === 'admin';
+    }
+    return false;
+});
+
 /**
  *  Checks if the required Template exists, and if not, get the error template
  *  @return {string} Template name
