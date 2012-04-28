@@ -4,7 +4,7 @@
  */
 Template.header.is_logged = function() {
     return Session.get('user') !== undefined;
-}
+};
 
 /**
  * Get the logged user name
@@ -12,7 +12,7 @@ Template.header.is_logged = function() {
  */
 Template.header.user_name = function() {
     return Session.get('user').name;
-}
+};
 
 /* Set the logout click event */
 Template.header.events = {
@@ -21,4 +21,4 @@ Template.header.events = {
         Session.set('user', undefined);
         Meteor.navigate('/user/list');
     }
-}
+};
