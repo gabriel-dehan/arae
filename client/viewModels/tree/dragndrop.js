@@ -2,7 +2,6 @@
 
 Template.node.events = {
     'afterinsert': function(e) {
-        console.log('OHOHOh');
         if ( Template.node.user_can_edit() ) {
             $('.file-name, .dir-name').each(function() {
                 /* We extract the DOM Object from jQuery */
