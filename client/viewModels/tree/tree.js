@@ -18,7 +18,7 @@ Template.node.node = function() {
     } else {
         return tree;
     }
-}
+};
 
 /**
  * Parse a node recursively
@@ -31,7 +31,7 @@ Template.node.parse = function(node) {
     } else {
         return node;
     }
-}
+};
 
 /**
  * Check if a user can edit a node
@@ -39,17 +39,23 @@ Template.node.parse = function(node) {
 Template.node.user_can_edit = function() {
     if ( Session.get('user') ) {
         return Session.get('user').tree_id === Session.get('tree_id');
-    } else {
-        return false;
     }
-}
+    return false;
+};
+
+Template.node.is_not_root = function() {
+    if ( !this.root )
+        return true;
+
+    return false;
+};
 
 /**
  * Reset the parsed tree
  */
 Template.tree.init = function(){
     tree = null;
-}
+};
 
 Template.tree.events = {
     /*
@@ -92,4 +98,4 @@ Template.tree.events = {
             }
         });
     }
-}
+};

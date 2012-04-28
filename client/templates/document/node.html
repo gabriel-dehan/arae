@@ -11,7 +11,7 @@
                         <ul class="edit" data-id="{{_id}}">
                             <li class="add-file"><i class="icon-plus-sign"></i>New File</li>
                             <li class="add-dir"><i class="icon-plus"></i>New Directory</li>
-                            <li class="rm-dir"><i class="icon-minus"></i>Delete</li>
+                            {{#if is_not_root}}<li class="rm-dir"><i class="icon-minus"></i>Delete</li>{{/if}}
                         </ul>
                      {{/if}}
                 </li>

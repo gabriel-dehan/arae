@@ -1,32 +1,36 @@
 
-Template.node.callback = function(){
-    if ( Template.node.user_can_edit() ) {
-        $('.file-name, .dir-name').each(function() {
-            /* We extract the DOM Object from jQuery */
-            var node = $(this).find('a')[0];
-            var parent = $(this)[0];
 
-            if (node && parent) {
-                node.addEventListener('dragstart', drag_start, false);
+Template.node.events = {
+    'afterinsert': function(e) {
+        console.log('OHOHOh');
+        if ( Template.node.user_can_edit() ) {
+            $('.file-name, .dir-name').each(function() {
+                /* We extract the DOM Object from jQuery */
+                var node = $(this).find('a')[0];
+                var parent = $(this)[0];
 
-                /* We want to be able to match the drag[enter|over|leave] & drop events on the File name itself but also on the whole line */
-                node.addEventListener('dragenter',   drag_enter, false);
-                parent.addEventListener('dragenter', drag_enter, false);
+                if (node && parent) {
+                    node.addEventListener('dragstart', drag_start, false);
 
-                node.addEventListener('dragover',    drag_over, false);
-                parent.addEventListener('dragover',  drag_over, false);
+                    /* We want to be able to match the drag[enter|over|leave] & drop events on the File name itself but also on the whole line */
+                    node.addEventListener('dragenter',   drag_enter, false);
+                    parent.addEventListener('dragenter', drag_enter, false);
 
-                node.addEventListener('dragleave',   drag_leave, false);
-                parent.addEventListener('dragleave', drag_leave, false);
+                    node.addEventListener('dragover',    drag_over, false);
+                    parent.addEventListener('dragover',  drag_over, false);
 
-                node.addEventListener('drop', drop, false);
-                parent.addEventListener('drop', drop, false);
+                    node.addEventListener('dragleave',   drag_leave, false);
+                    parent.addEventListener('dragleave', drag_leave, false);
 
-                node.addEventListener('dragend', drag_end, false);
-            }
-        });
+                    node.addEventListener('drop', drop, false);
+                    parent.addEventListener('drop', drop, false);
+
+                    node.addEventListener('dragend', drag_end, false);
+                }
+            });
+        }
     }
-}
+};
 
 var dragged_element = null;
 

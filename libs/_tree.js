@@ -1,7 +1,54 @@
+/**
+ * Tree class, a tree shall be constructed with an array of objects like this :
+ * TODO: Give details
+ * [{
+         root          : true,
+         is_dir        : 1,
+         owner         : name.capitalize(),
+         users         : [name.capitalize()],
+         _id           : 1,
+         created_at    : `timestamp`,
+         last_modified : `timestamp`,
+         tree          : [
+                             {
+                                 is_dir        : 0,
+                                 _id           : 2,
+                                 name          : 'leaf1',
+                                 created_at    : `timestamp`,
+                                 last_modified : `timestamp`,
+                             },
+                             {
+                                 is_dir        : 1,
+                                 _id           : 3,
+                                 name          : 'branch1',
+                                 created_at    : `timestamp`,
+                                 last_modified : `timestamp`,
+                                 tree          : [ { ... } ]
+                             },
+                             { ... }
+                         ]
+    }]
+ * @type {*}
+ */
 var Tree = Base.extend({
     constructor: function(tree) {
         this.tree = tree;
         this.count = this.count_nodes(0);
+    },
+
+    /**
+     * Get tree owner
+     * @param tree
+     */
+    get_owner: function() {
+        var first = this.tree[0];
+        // If first element of tree is root (we are on a regular DocumentTree)
+        if ( first.root ) {
+            return first.owner;
+        // Else there is no real owner
+        } else {
+            return 'Anonymous';
+        }
     },
 
     /**
