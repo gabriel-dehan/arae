@@ -49,6 +49,8 @@ function drag_start(e){
     // dragIcon.src = 'logo.png';
     // dragIcon.width = 100;
     // e.dataTransfer.setDragImage(dragIcon, -10, -10);
+
+    /* TODO: Remove style when drag end is not reached (if we drag off the documenttree for exemple) */
 }
 
 function drag_enter(e){

@@ -33,15 +33,20 @@ Template.node.parse = function(node) {
 };
 
 /**
- * Check if a user can edit a node
+ * Check if a user can edit a node (He has the tree_id or is admin)
  */
 Template.node.user_can_edit = function() {
-    if ( Session.get('user') ) {
-        return Session.get('user').tree_id === Session.get('tree_id');
+    var user = Session.get('user');
+    if ( user ) {
+        return ((user.tree_id === Session.get('tree_id')) || user.name === 'admin');
     }
     return false;
 };
 
+/**
+ * Check if the current node is the root directory
+ * @return {Boolean}
+ */
 Template.node.is_not_root = function() {
     if ( !this.root )
         return true;
