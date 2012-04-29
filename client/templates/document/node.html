@@ -3,7 +3,7 @@
         {{#with parse this}}
             {{#if is_dir}}
                 <li class="dir-name dir-{{_id}}">
-                    <a href="#{{_id}}" {{#if user_can_edit}}draggable="true"{{/if}}>
+                    <a href="#{{_id}}" {{#if is_not_root}}{{#if user_can_edit}}draggable="true"{{/if}}{{/if}}>
                         <i class="icon-folder-close"></i>
                         {{name}}/
                     </a>
