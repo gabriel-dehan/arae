@@ -52,6 +52,20 @@ var Tree = Base.extend({
     },
 
     /**
+     * Delete all nodes of root
+     * @return {Boolean}
+     */
+    delete_all: function() {
+        var first = this.tree[0];
+        if ( first.root ) {
+            first.tree = [];
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    /**
      * Count recursively the nodes of a tree
      * @param {number} count
      * @param {object} tree
@@ -138,6 +152,7 @@ var Tree = Base.extend({
         if ( tree === undefined ) tree = that.tree;
 
         _.each(tree, function(node){
+
             /* No strict equality as node_id can be a string */
             if ( node_id == node._id ) {
                 _node = node;

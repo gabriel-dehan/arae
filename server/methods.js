@@ -153,5 +153,17 @@ Meteor.methods({
         }
 
         return t.tree;
+    },
+
+    /**
+     * Delete all nodes in the tree, except for root
+     * @param tree
+     * @param tree_id
+     */
+    delete_all_in_tree: function(tree, tree_id) {
+        var t = new Tree(tree);
+        t.delete_all();
+
+        DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
     }
 });

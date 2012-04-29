@@ -1,7 +1,7 @@
 <template name="tree">
     <header id="tree-header">
         <h1 class="title-tree">/</h1>
-        <button class="btn btn-danger pull-right">Delete all</button>
+        {{#if is_owner}}<button class="btn btn-danger pull-right" id="delete-all">Delete all</button>{{/if}}
     </header>
     <div class="tree well well-small">
         <ul id="root" class="nav nav nav-list">
