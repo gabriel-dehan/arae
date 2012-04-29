@@ -1,51 +1,22 @@
+// Used in node.js file, reset the current tree on application loading
 var tree = null;
 
 /**
- * Retrieve a node tree
+ * Check if the user is the tree owner or the admin
+ * @return {Boolean}
  */
-Template.node.node = function() {
-    /* If tree has not been defined, we get it from the database */
-    if ( tree === undefined || tree === null ) {
-        tree = DocumentTree.findOne({_id:Session.get('tree_id')});
-        /* We wait for tree to be defined ( Database can sometimes take a "while" to answer ) */
-        if ( tree ) {
-            tree = tree.root;
-            Session.set('current_tree', tree);
-            return tree;
-        } else {
-            return [];
-        }
-    } else {
-        return tree;
-    }
-};
+Template.tree.is_owner = function () {
+    var current_tree = DocumentTree.findOne({_id:Session.get('tree_id')});
 
-/**
- * Parse a node recursively
- * @param node
- */
-Template.node.parse = function(node) {
-    if ( node.is_dir ) {
-        tree = node.tree;
-        return node;
-    } else {
-        return node;
-    }
-};
+//    /* We wait for current_tree to be defined */
+    if ( current_tree ) {
+        var t = new Tree(current_tree.root),
+            owner = t.get_owner(),
+            user  = Session.get('user');
 
-/**
- * Check if a user can edit a node
- */
-Template.node.user_can_edit = function() {
-    if ( Session.get('user') ) {
-        return Session.get('user').tree_id === Session.get('tree_id');
+        if ( user && ( user.name === 'admin' || owner === user.name ) )
+            return true;
     }
-    return false;
-};
-
-Template.node.is_not_root = function() {
-    if ( !this.root )
-        return true;
 
     return false;
 };
@@ -94,6 +65,44 @@ Template.tree.events = {
             if ( error ) {
                 console.log(error);
             } else {
+                /* As we just deleted a node, we want to make sure it is not selected anymore, so we reset the selection */
+                Session.set('selected_item', 0);
+                Template.tree.init();
+            }
+        });
+    },
+
+    /*
+     * Select a file and add it's id to the session
+     */
+    'click .file-name, click .dir-name' : function(e) {
+        /* Even if we clicked on the <A> tag inside a li.file-name or li.dir-name we want to act on the li */
+        var target = $(e.target);
+
+        if ( target.hasClass('file-name') || target.hasClass('dir-name') ) {
+            var self = target,
+            id       = target.children('a').attr('href');
+        } else {
+            var self = target.parent(),
+            id       = target.attr('href');
+        }
+        $('.file-name.selected, .dir-name.selected').removeClass('selected');
+        self.addClass('selected');
+
+        if ( id )
+            Session.set('selected_file', id.replace('#', ''));
+    },
+
+    /*
+     * Remove all files in the current tree
+     */
+    'click #delete-all' : function(e) {
+        Meteor.call('delete_all_in_tree', Session.get('current_tree'), Session.get('tree_id'), function(error, result){
+            if ( error ) {
+                console.log(error);
+            } else {
+                /* As we just deleted a node, we want to make sure it is not selected anymore, so we reset the selection */
+                Session.set('selected_item', 0);
                 Template.tree.init();
             }
         });
