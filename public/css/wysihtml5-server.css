@@ -13,6 +13,7 @@
 
     TREE
         TITLE
+    	FILES
         EDIT
         DOCUMENT INFOS
         DRAG & DROP
@@ -24,7 +25,7 @@ body {
 }
 
 .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
-    width:960px;
+    min-width:960px;
 }
 
 /* =HEADER */
@@ -37,6 +38,7 @@ body {
 }
 
 /* =TITLE */
+
 h1.page-header {
     margin-top: 0;
 }
@@ -196,7 +198,7 @@ h1.page-header {
 }
 
 .tree {
-    width: 75%;
+    width: 77%;
     float: left;
     padding-bottom: 20px;
 }
@@ -204,6 +206,14 @@ h1.page-header {
 .tree .nav > li:hover {
     text-decoration: none;
     background-color: #EEE;
+}
+
+.tree .nav > li.selected:hover {
+	background-color: #08C;
+}
+
+.tree .nav > li.selected > a:hover {
+	background-color: #08C;
 }
 
 .tree .nav > .nav-header:hover {
@@ -218,12 +228,32 @@ h1.page-header {
     padding-right: 0;
 }
 
+.tree .nav-header {
+	width: 100%;
+}
+
 /* ==TITLE */
 h1.title-tree {
     padding-left: 28px;
     color: #444;
     width: 80%;
     display: inline-block;
+	float: left;
+}
+
+/* ==FILES */
+.file-name.selected, .dir-name.selected {
+	background-color: #08C;
+}
+
+.file-name.selected a, .dir-name.selected a {
+	color: white;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+	background-color: #08C;
+}
+
+.file-name.selected .edit li, .dir-name.selected .edit li {
+	color: white;
 }
 
 /* ==EDIT */
@@ -263,7 +293,7 @@ h1.title-tree {
 
 /* ==DOCUMENT INFOS */
 .document-infos {
-    width: 19%;
+    width: 200px;
     float: right;
     text-align: center;
     padding-top: 9px;
@@ -274,6 +304,11 @@ h1.title-tree {
     float: left;
     margin-bottom: 13px;
 }
+
+/* TODO: Mettre un separateur */
+/*.document-infos #informations li {*/
+	/*border-bottom: 1px solid gray;*/
+/*}*/
 
 .document-infos .nav-header {
     padding-bottom: 12px;
