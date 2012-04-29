@@ -1,6 +1,7 @@
 
 
 Template.node.events = {
+    /* Triggered after render and DOM insertions */
     'afterinsert': function(e) {
         if ( Template.node.user_can_edit() ) {
             $('.file-name, .dir-name').each(function() {
