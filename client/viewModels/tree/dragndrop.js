@@ -87,7 +87,7 @@ function drop(e){
     else
         e.cancelBubble = true;
 
-//    try {
+    try {
         var that;
         /* <A> */
         if ( !( this.classList.contains('file-name') || this.classList.contains('dir-name') ) ) {
@@ -126,9 +126,9 @@ function drop(e){
             Message.set('You must log in.<br />If you already are, try to log out and then log in again, this issue is due to a server maintenance.', 'important');
             Meteor.navigate(Session.get('route'));
         }
-//    } catch(e) {
-//        console.log(e);
-//    }
+    } catch(e) {
+        console.log(e);
+    }
 
     return false;
 }
