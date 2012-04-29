@@ -167,5 +167,19 @@ Meteor.methods({
         t.delete_all();
 
         DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
+    },
+
+    /**
+     * Add or remove a user from a node and each subdirectories if it's a directory
+     * @param {Boolean} true for add, false for remove
+     * @param tree The current tree
+     * @param user_name The username
+     * @param node_id Node into which will start adding or removing user names
+     * @param tree_id Tree into which will be done DB insertion
+     */
+    toggle_user_for_node: function(add, tree, user_name, node_id, tree_id) {
+        var t = new Tree(tree);
+        t.toggle_user(add, user_name, node_id);
+        return true;
     }
 });

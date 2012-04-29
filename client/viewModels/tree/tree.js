@@ -2,26 +2,6 @@
 var tree = null;
 
 /**
- * Check if the user is the tree owner or the admin
- * @return {Boolean}
- */
-Template.tree.is_owner = function () {
-    var current_tree = DocumentTree.findOne({_id:Session.get('tree_id')});
-
-//    /* We wait for current_tree to be defined */
-    if ( current_tree ) {
-        var t = new Tree(current_tree.root),
-            owner = t.get_owner(),
-            user  = Session.get('user');
-
-        if ( user && ( user.name === 'admin' || owner === user.name ) )
-            return true;
-    }
-
-    return false;
-};
-
-/**
  * Reset the parsed tree
  */
 Template.tree.init = function(){
@@ -56,6 +36,32 @@ Template.tree.events = {
             });
         }
     },
+
+    'click .add-user, click .remove-user' : function(e){
+        var parent    = $(e.target).closest('.dir-name, .file-name'),
+            parent_id = $(e.target).parent('ul.edit').attr('data-id'),
+            user_name = prompt('User name', ''),
+            add_user  = true;
+
+        /* If we clicked on remove user, we set add_user to false */
+        if( $(e.target).hasClass('remove-user') ) {
+            add_user = false;
+        }
+
+        if ( User.findOne({name:user_name}) ) {
+            if ( parent && parent_id ) {
+                Meteor.call('toggle_user_for_node', add_user, Session.get('current_tree'), user_name, parent_id, Session.get('tree_id'), function(error, result){
+                    console.log(error, result);
+                });
+
+            }
+        } else {
+            Meteor.message.set('User "' + user_name + '" does not exist.', 'warning');
+            Meteor.navigate(Session.get('route'));
+        }
+    },
+
+    /* TODO: Remove user */
 
     /*
      * Remove a file or directory

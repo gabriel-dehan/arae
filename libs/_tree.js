@@ -192,6 +192,42 @@ var Tree = Base.extend({
     },
 
     /**
+     * Add or remove a user recursively to a node or directories and subdirectories
+     * @param {Boolean} true for add, false for remove
+     * @param user_name
+     * @param node_id
+     * @param tree
+     */
+    toggle_user: function(add, user_name, node_id, tree) {
+        var that = this;
+        if ( node_id ) {
+            _node = this.fetch_node(node_id);
+            that.user_toggle(add, _node, user_name);
+            var is_dir = _node.is_dir;
+        } else {
+            var is_dir = true;
+        }
+
+        if ( is_dir ){
+            if ( tree === undefined ) tree = _node.tree;
+            _.each(tree, function(node){
+                that.user_toggle(add, node, user_name);
+                if ( node.is_dir ) {
+                    that.toggle_user(add, user_name, null, node.tree);
+                }
+            });
+        }
+    },
+
+    user_toggle: function(add, node, user_name) {
+        if( add ) {
+            node.users.push(user_name);
+        } else {
+            node.users = _.without(node.users, user_name);
+        }
+    },
+
+    /**
      * Checks if node name already exists in the chosen node
      * @param name
      * @param node_id

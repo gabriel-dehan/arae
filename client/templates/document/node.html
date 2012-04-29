@@ -10,9 +10,11 @@
                         <ul class="edit" data-id="{{_id}}">
                             <li class="add-file"><i class="icon-plus-sign"></i>New File</li>
                             <li class="add-dir"><i class="icon-plus"></i>New Directory</li>
+                            {{#if is_owner}}<li class="add-user"><i class="icon-user"></i>Allow user</li>{{/if}}
                             {{#if is_not_root}}<li class="rm-dir"><i class="icon-minus"></i>Delete</li>{{/if}}
                         </ul>
                      {{/if}}
+                    <!-- TODO: User not allowed display an icon -->
                 </li>
                 <ul class="dir nav nav-list" id="{{_id}}">
                     {{> node}}
@@ -24,6 +26,7 @@
                     </a>
                     {{#if user_can_edit}}
                         <ul class="edit" data-id="{{_id}}">
+                            {{#if is_owner}}<li class="add-user"><i class="icon-user"></i>Allow user</li>{{/if}}
                             <li class="rm-file"><i class="icon-minus-sign"></i>Delete</li>
                         </ul>
                     {{/if}}

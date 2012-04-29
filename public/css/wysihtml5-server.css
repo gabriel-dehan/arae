@@ -298,12 +298,12 @@ h1.title-tree {
     padding-right: 5px;
 }
 
-.edit .rm-file, .edit .rm-dir, .edit .add-file, .edit .add-dir {
+.edit .rm-file, .edit .rm-dir, .edit .add-file, .edit .add-dir, .edit .add-user {
     cursor: pointer;
     color: #08C;
 }
 
-.edit .rm-file:hover, .edit .rm-dir:hover, .edit .add-file:hover, .edit .add-dir:hover {
+.edit .rm-file:hover, .edit .rm-dir:hover, .edit .add-file:hover, .edit .add-dir:hover, .edit .add-user:hover {
     color: #005580;
 }
 

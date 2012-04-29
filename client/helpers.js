@@ -29,6 +29,24 @@ Handlebars.registerHelper('is_admin', function() {
 });
 
 /**
+ * Check if the user is the tree owner or the admin
+ * @return {Boolean}
+ */
+Handlebars.registerHelper('is_owner', function () {
+    var current_tree = DocumentTree.findOne({_id:Session.get('tree_id')});
+//    /* We wait for current_tree to be defined */
+    if ( current_tree ) {
+        var t = new Tree(current_tree.root),
+            owner = t.get_owner(),
+            user  = Session.get('user');
+
+        if ( user && ( user.name === 'admin' || owner === user.name ) )
+            return true;
+    }
+    return false;
+});
+
+/**
  *  Checks if the required Template exists, and if not, get the error template
  *  @return {string} Template name
  */
