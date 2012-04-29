@@ -2,7 +2,6 @@
  * Get the page title
  * @return {string} formated string
  */
-
 Handlebars.registerHelper('page_title', function() {
     return Meteor.view.replace('_', ' ').capitalize();
 });
@@ -22,7 +21,6 @@ Handlebars.registerHelper('is_user', function(){
 });
 
 Handlebars.registerHelper('is_admin', function() {
-    /* TODO: Not really clean checking with the admin string... */
     var user = Session.get('user');
     if ( user ) {
         return user.name === 'admin';
