@@ -188,7 +188,31 @@ h1.page-header {
 }
 
 /* ==LIST */
-/* TODO: User list remove & follow td width */
+
+.user-list .user-name {
+	padding-left: 10px;
+	padding-top: 4px;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.user-list .follow, .user-list .delete {
+	width: 80px;
+	padding-top: 6px;
+	padding-left: 15px;
+}
+
+.follow i, .delete i {
+	padding-right: 8px;
+}
+
+.delete a {
+	color: #BD362F;
+}
+
+.delte a:hover {
+	color: #DA4F49;
+}
 
 /* =TREE */
 
@@ -306,9 +330,16 @@ h1.title-tree {
 }
 
 /* TODO: Mettre un separateur */
-/*.document-infos #informations li {*/
-	/*border-bottom: 1px solid gray;*/
-/*}*/
+.document-infos #informations .info, .document-infos #informations .last {
+	float: left;
+	width: 100%;
+	padding-bottom: 5px;
+	margin-bottom: 8px;
+}
+
+.document-infos #informations .info {
+	border-bottom: 1px solid #DDD;
+}
 
 .document-infos .nav-header {
     padding-bottom: 12px;

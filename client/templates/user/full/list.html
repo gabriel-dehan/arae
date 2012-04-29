@@ -4,8 +4,8 @@
         {{#each users}}
         <tr id="{{_id}}">
             <td class="user-name"><a href="/tree/id-{{tree_id}}" data-link="internal">{{capitalize name}}</a></td>
-            <td><i class="icon-eye-open"></i><a href="" class="follow-user">Follow</a></td>
-            {{#if is_admin}}<td><i class="icon-remove"></i><a href="" class="remove-user">Remove</a></td>{{/if}}
+            <td class="follow"><i class="icon-eye-open"></i><a href="#" class="follow-user">Follow</a></td>
+            {{#if is_admin}}<td class="delete"><i class="icon-remove"></i><a href="#" class="remove-user">Remove</a></td>{{/if}}
         </tr>
         {{/each}}
     </table>
