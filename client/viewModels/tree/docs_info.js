@@ -13,6 +13,7 @@ Template.doc_infos.selected = function() {
 
     return {
         owner         : node.owner,
+        users         : node.users.join(', '),
         created_on    : created_at.format("mm/dd/yyyy"),
         created_at    : created_at.format("H:MM:ss"),
         last_modified : last_modified.format("mm/dd/yyyy, H:MM:ss")
