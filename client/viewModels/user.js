@@ -8,7 +8,7 @@
  * @return {Meteor Collection} all users
  */
 Template.user_list.users = function() {
-    return User.find().fetch();
+    return User.find( { name : { $ne : 'admin' } } ).fetch();
 };
 
 /**
@@ -24,7 +24,6 @@ Template.user_list.capitalize = function( string ) {
 /* =Login events */
 Template.login.events = {
     'click #login_submit': function(e){
-        console.log('CA SUBMIT LOL');
         e.preventDefault();
 
         var form = $(e.delegateTarget),
