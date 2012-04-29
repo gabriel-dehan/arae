@@ -33,6 +33,17 @@ Template.node.parse = function(node) {
 };
 
 /**
+ * If the name is too long, slice it
+ * @param name
+ * @return {String}
+ */
+Template.node.shorten_name = function(name) {
+    if ( name && name.length > 30 )
+        return name.substring(0, 30);
+    return name;
+};
+
+/**
  * Check if a user can edit a node (He has the tree_id or is admin)
  */
 Template.node.user_can_edit = function() {

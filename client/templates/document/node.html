@@ -4,8 +4,7 @@
             {{#if is_dir}}
                 <li class="dir-name dir-{{_id}}">
                     <a href="#{{_id}}" {{#if is_not_root}}{{#if user_can_edit}}draggable="true"{{/if}}{{/if}}>
-                        <i class="icon-folder-close"></i>
-                        {{name}}/
+                        <i class="icon-folder-close"></i>{{shorten_name name}}/
                     </a>
                     {{#if user_can_edit}}
                         <ul class="edit" data-id="{{_id}}">
@@ -21,8 +20,7 @@
             {{else}}
                 <li class="file-name">
                     <a href="#{{_id}}" {{#if user_can_edit}}draggable="true"{{/if}}>
-                        <i class="icon-file"></i>
-                        {{name}}
+                        <i class="icon-file"></i>{{shorten_name name}}
                     </a>
                     {{#if user_can_edit}}
                         <ul class="edit" data-id="{{_id}}">

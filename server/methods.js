@@ -148,8 +148,10 @@ Meteor.methods({
         } else if ( t.name_exists(node_id, to) ) {
             throw new Meteor.Error(200, 'name_exists');
         } else {
-            t.move(node_id, to);
-            DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
+            if ( t.move(node_id, to) )
+                DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
+            else
+                throw new Meteor.Error(200, 'directory_in_directory');
         }
 
         return t.tree;

@@ -38,21 +38,23 @@ Template.tree.events = {
         name          = '';
 
         if ( is_dir ) {
-            name = prompt('Directory name', 'New Directory');
+            name = prompt('Directory name (30 characters max)', 'New Directory');
             is_dir = 1;
         } else {
-            name = prompt('File name', 'New file');
+            name = prompt('File name (30 characters max)', 'New file');
             is_dir = 0;
         }
 
-        Meteor.call('insert_in_dir', Session.get('current_tree'), name, parent_id, Session.get('tree_id'), is_dir, function(error, result){
-            if ( error && (error.reason === 'name_exists') ) {
-                Meteor.message.set('"' + name + '" already exists.', 'warning');
-                Meteor.navigate(Session.get('route'));
-            } else {
-                Template.tree.init();
-            }
-        });
+        if ( name ) {
+            Meteor.call('insert_in_dir', Session.get('current_tree'), name, parent_id, Session.get('tree_id'), is_dir, function(error, result){
+                if ( error && (error.reason === 'name_exists') ) {
+                    Meteor.message.set('"' + name + '" already exists.', 'warning');
+                    Meteor.navigate(Session.get('route'));
+                } else {
+                    Template.tree.init();
+                }
+            });
+        }
     },
 
     /*
@@ -66,7 +68,7 @@ Template.tree.events = {
                 console.log(error);
             } else {
                 /* As we just deleted a node, we want to make sure it is not selected anymore, so we reset the selection */
-                Session.set('selected_item', 0);
+                Session.set('selected_file', 0);
                 Template.tree.init();
             }
         });
@@ -102,7 +104,7 @@ Template.tree.events = {
                 console.log(error);
             } else {
                 /* As we just deleted a node, we want to make sure it is not selected anymore, so we reset the selection */
-                Session.set('selected_item', 0);
+                Session.set('selected_file', 0);
                 Template.tree.init();
             }
         });
