@@ -135,10 +135,35 @@ var Tree = Base.extend({
      * Move a node
      * @param node_id
      * @param destination_id
-     * @param tree
+     * @return {Boolean}
      */
-    move: function(node_id, destination_id, tree){
-        this.insert( this.delete(node_id), destination_id );
+    move: function(node_id, destination_id){
+        /* We check if the node is the same as the destination node,
+         * and if we are trying to move a node inside one of it's own directories
+         */
+        if ( node_id !== destination_id && !this.tree_contains(node_id, destination_id) ) {
+            this.insert( this.delete(node_id), destination_id );
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    /**
+     * Check if a node is inside a tree
+     * @param container_id
+     * @param node_id
+     * @return {Boolean}
+     */
+    tree_contains: function(container_id, node_id){
+        var container = this.fetch_node(container_id);
+        // If the container has a tree (is a directory)
+        if ( container.tree ) {
+            // If we find the node in the container tree
+            if( this.fetch_node( node_id, container.tree ) )
+                return true
+        }
+        return false;
     },
 
     /**
