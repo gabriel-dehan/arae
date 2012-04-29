@@ -1,4 +1,4 @@
-wysiwyg-editor-meteor
+Arae
 =====================
 
-A simple multi-user wysiwyg in HTML5 using Meteor.js
+A simple multi-user Explorer with Text file Wysiwyg in HTML5, using Meteor.js
