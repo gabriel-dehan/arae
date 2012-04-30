@@ -15,6 +15,7 @@
         TITLE
     	FILES
         EDIT
+        RENAME
         DOCUMENT INFOS
         DRAG & DROP
 */
@@ -313,6 +314,45 @@ h1.title-tree {
 
 .edit .rm-file:hover, .edit .rm-dir:hover, .edit .remove-user:hover {
     color: #DA4F49;
+}
+
+/* ==RENAME */
+.rename-field {
+	border: none;
+	background: #CCC;
+	border-radius: 0;
+	box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	margin: 0;
+	padding: 2px 15px;
+
+	background: #ededed;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI0OSUiIHN0b3AtY29sb3I9IiNlZGVkZWQiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDA4OGNjIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+	background: -moz-linear-gradient(left,  #ededed 49%, #0088cc 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(49%,#ededed), color-stop(100%,#0088cc));
+	background: -webkit-linear-gradient(left,  #ededed 49%,#0088cc 100%);
+	background: -o-linear-gradient(left,  #ededed 49%,#0088cc 100%);
+	background: -ms-linear-gradient(left,  #ededed 49%,#0088cc 100%);
+	background: linear-gradient(left,  #ededed 49%,#0088cc 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#0088cc',GradientType=1 );
+
+
+}
+
+.rename-field::selection {
+	background:black;;
+	color:#fff;
+}
+
+.rename-field::-moz-selection {
+	background:black;
+	color:#fff;
+}
+
+.rename-field::-webkit-selection {
+	background:black;
+	color:#fff;
 }
 
 /* ==DOCUMENT INFOS */

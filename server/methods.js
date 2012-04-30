@@ -188,5 +188,28 @@ Meteor.methods({
         t.toggle_user(add, user_name, node_id);
         DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
         return true;
+    },
+
+    change_node_name: function(tree, name, node_id, tree_id) {
+        var t           = new Tree(tree),
+            name_exists = false,
+            node        = t.fetch_node(node_id);
+
+        _.each(t.fetch_parent(node_id).tree, function(_node){
+            // We check if the node name and the node type match ( File and directory can have the same name )
+            if ( _node.name === name && _node.is_dir === node.is_dir )
+                name_exists = true;
+        });
+
+        if ( !name_exists ) {
+            node.name = name;
+            DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
+        } else {
+            // We do nothing if we are renaming a node with it's own name
+            if ( node.name === name )
+                throw new Meteor.Error('200', null);
+            else
+                throw new Meteor.Error('200', "A file or directory with this name already exists in the current directory.");
+        }
     }
 });

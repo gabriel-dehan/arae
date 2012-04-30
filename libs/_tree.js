@@ -150,13 +150,14 @@ var Tree = Base.extend({
     },
 
     /**
-     * Check if a node is inside a tree
+     * Check if a node is inside a tree or a subtree
      * @param container_id
      * @param node_id
      * @return {Boolean}
      */
     tree_contains: function(container_id, node_id){
         var container = this.fetch_node(container_id);
+        console.log(this.fetch_node( node_id, container.tree ));
         // If the container has a tree (is a directory)
         if ( container.tree ) {
             // If we find the node in the container tree
@@ -189,6 +190,28 @@ var Tree = Base.extend({
         });
 
         return _node;
+    },
+
+    /**
+     * Fetch parent for a node
+     * @param node_id
+     * @return {Boolean}
+     */
+    fetch_parent: function(node_id, container){
+        var that   = this,
+            parent = null;
+        // TODO: Don't user that.tree[0] because we want to handle other root trees
+        if ( container === undefined ) container = that;
+
+        _.each(container.tree, function(node) {
+            if ( node_id == node._id ) {
+                parent = container;
+            }
+            if ( node.is_dir )
+                parent = parent ? parent : that.fetch_parent( node_id, node );
+        });
+
+        return parent;
     },
 
     /**

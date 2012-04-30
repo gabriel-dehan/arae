@@ -110,6 +110,38 @@ Template.tree.events = {
     },
 
     /*
+     * Rename a file
+     */
+    'dblclick .file-name a, dblclick .dir-name a': function(e) {
+        var node_id = $(e.target).siblings('ul.edit').attr('data-id'),
+            target  = $(e.target).hide(),
+            field   = $('<input type="text" class="rename-field" value="' + target.text().trim().trim('/') + '"/>').appendTo(target.parent('li'));
+
+        field.trigger('focus');
+        field.keypress(function(e) {
+            var code = (e.keyCode) ? e.keyCode : e.which;
+            if ( code == 13 ) {
+                var file_name = field.val();
+
+                Meteor.call('change_node_name', Session.get('current_tree'), file_name, node_id, Session.get('tree_id'), function(error, result){
+                    if ( error ) {
+                        console.log(error);
+                    } else {
+                        Template.tree.init();
+                    }
+                });
+                field.remove();
+                target.show();
+            }
+        });
+
+        field.blur(function() {
+            field.remove();
+            target.show();
+        });
+    },
+
+    /*
      * Remove all files in the current tree
      */
     'click #delete-all' : function(e) {

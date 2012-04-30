@@ -1,3 +1,8 @@
+Meteor.startup(function(){
+    // Avoid some bugs when selected_file is not set
+    Session.set('selected_file', 0);
+});
+
 /**
  * Retrieve a node tree
  */
@@ -80,3 +85,4 @@ Template.node.is_not_root = function() {
 
     return false;
 };
+
