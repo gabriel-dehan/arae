@@ -6,15 +6,17 @@
                     <a href="#{{_id}}" {{#if is_not_root}}{{#if user_can_edit}}draggable="true"{{/if}}{{/if}}>
                         <i class="icon-folder-open"></i>{{shorten_name name}}/
                     </a>
-                    {{#if user_can_edit}}
+                    {{#if collaborator_allowed_to_edit this}}
                         <ul class="edit" data-id="{{_id}}">
-                            <li class="add-file"><i class="icon-plus-sign"></i>New File</li>
-                            <li class="add-dir"><i class="icon-plus"></i>New Directory</li>
+                        <li class="add-file"><i class="icon-plus-sign"></i>New File</li>
+                        <li class="add-dir"><i class="icon-plus"></i>New Directory</li>
+                        {{#if user_can_edit}}
                             {{#if is_owner}}<li class="add-user" data-toggle="modal" data-target="#modal"><i class="icon-user"></i>Allow user</li>{{/if}}
                             {{#if is_owner}}<li class="remove-user" data-toggle="modal" data-target="#modal"><i class="icon-user"></i>Remove user</li>{{/if}}
-                            {{#if is_not_root}}<li class="rm-dir"><i class="icon-minus"></i>Delete</li>{{/if}}
+                        {{/if}}
+                        {{#if is_not_root}}<li class="rm-dir"><i class="icon-minus"></i>Delete</li>{{/if}}
                         </ul>
-                     {{/if}}
+                    {{/if}}
                     <!-- TODO: User not allowed display an icon -->
                 </li>
                 <ul class="dir nav nav-list" id="{{_id}}">
@@ -25,10 +27,12 @@
                     <a href="#{{_id}}" {{#if user_can_edit}}draggable="true"{{/if}}>
                         <i class="icon-file"></i>{{shorten_name name}}
                     </a>
-                    {{#if user_can_edit}}
+                    {{#if collaborator_allowed_to_edit this}}
                         <ul class="edit" data-id="{{_id}}">
+                        {{#if user_can_edit}}
                             {{#if is_owner}}<li class="add-user" data-toggle="modal" data-target="#modal"><i class="icon-user"></i>Allow user</li>{{/if}}
                             {{#if is_owner}}<li class="remove-user" data-toggle="modal" data-target="#modal"><i class="icon-user"></i>Remove user</li>{{/if}}
+                        {{/if}}
                             <li class="rm-file"><i class="icon-minus-sign"></i>Delete</li>
                         </ul>
                     {{/if}}

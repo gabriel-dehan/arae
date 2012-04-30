@@ -54,6 +54,14 @@ Template.node.user_can_edit = function() {
     return false;
 };
 
+Template.node.collaborator_allowed_to_edit = function(node) {
+    var user = Session.get('user');
+    if ( user )
+        return _.contains(node.users, user.name);
+
+    return false;
+};
+
 /**
  * Check if the current node is the root directory
  * @return {Boolean}
