@@ -220,9 +220,9 @@ var Tree = Base.extend({
     },
 
     user_toggle: function(add, node, user_name) {
-        if( add ) {
+        if( add && !_.contains(node.users, user_name) ) {
             node.users.push(user_name);
-        } else {
+        } else if ( !add ) {
             node.users = _.without(node.users, user_name);
         }
     },

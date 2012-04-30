@@ -298,7 +298,7 @@ h1.title-tree {
     padding-right: 5px;
 }
 
-.edit .rm-file, .edit .rm-dir, .edit .add-file, .edit .add-dir, .edit .add-user {
+.edit .rm-file, .edit .rm-dir, .edit .add-file, .edit .add-dir, .edit .add-user, .edit .remove-user {
     cursor: pointer;
     color: #08C;
 }
@@ -307,11 +307,11 @@ h1.title-tree {
     color: #005580;
 }
 
-.edit .rm-file, .edit .rm-dir {
+.edit .rm-file, .edit .rm-dir, .edit .remove-user {
     color: #BD362F;
 }
 
-.edit .rm-file:hover, .edit .rm-dir:hover {
+.edit .rm-file:hover, .edit .rm-dir:hover, .edit .remove-user:hover {
     color: #DA4F49;
 }
 

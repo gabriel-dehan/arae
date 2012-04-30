@@ -82,6 +82,7 @@ Meteor.methods({
         var t       = new Tree(tree),
         file_id     = DocumentTree.findOne({_id:tree_id}),
         owner       = t.get_owner(),
+        users       = t.fetch_node(dir_id).users,
         now         = Date.now();
 
         file_id     = file_id.count;
@@ -91,7 +92,7 @@ Meteor.methods({
                             is_dir        : is_dir,
                             name          : name,
                             owner         : owner,
-                            users         : [owner],
+                            users         : users,
                             created_at    : now,
                             last_modified : now
                       };
@@ -179,7 +180,13 @@ Meteor.methods({
      */
     toggle_user_for_node: function(add, tree, user_name, node_id, tree_id) {
         var t = new Tree(tree);
+
+        if ( user_name === t.get_owner() ) {
+            throw new Meteor.Error(200, "Can't remove or add owner");
+        }
+
         t.toggle_user(add, user_name, node_id);
+        DocumentTree.update({_id:tree_id}, {$set : {root:t.tree}});
         return true;
     }
 });

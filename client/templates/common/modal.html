@@ -1,0 +1,25 @@
+<template name="modal">
+    <div class="modal" id="modal" style="display:none">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Choose an user</h3>
+      </div>
+      <div class="modal-body">
+          <div class="control-group">
+                      <label class="control-label" for="select_user">User name</label>
+                      <div class="controls">
+                        <select id="select_user">
+                          <option value="None">None</option>
+                          {{#each user}}
+                              <option value="{{name}}">{{name}}</option>
+                          {{/each}}
+                        </select>
+                      </div>
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        <a href="#" class="btn btn-primary" data-dismiss="modal" id="modal-save">Save changes</a>
+      </div>
+    </div>
+</template>

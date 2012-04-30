@@ -40,25 +40,33 @@ Template.tree.events = {
     'click .add-user, click .remove-user' : function(e){
         var parent    = $(e.target).closest('.dir-name, .file-name'),
             parent_id = $(e.target).parent('ul.edit').attr('data-id'),
-            user_name = prompt('User name', ''),
-            add_user  = true;
+            target    = $(e.target);
 
-        /* If we clicked on remove user, we set add_user to false */
-        if( $(e.target).hasClass('remove-user') ) {
-            add_user = false;
-        }
+        $('#modal-save').on('click', function(e) {
+            var user_name = $(e.target).closest('#modal').find('#select_user').val(),
+                add_user  = true;
 
-        if ( User.findOne({name:user_name}) ) {
-            if ( parent && parent_id ) {
-                Meteor.call('toggle_user_for_node', add_user, Session.get('current_tree'), user_name, parent_id, Session.get('tree_id'), function(error, result){
-                    console.log(error, result);
-                });
-
+            /* If we clicked on remove user, we set add_user to false */
+            if( target.hasClass('remove-user') ) {
+                add_user = false;
             }
-        } else {
-            Meteor.message.set('User "' + user_name + '" does not exist.', 'warning');
-            Meteor.navigate(Session.get('route'));
-        }
+            if ( User.findOne({name:user_name}) ) {
+                if ( parent && parent_id ) {
+                    Meteor.call('toggle_user_for_node', add_user, Session.get('current_tree'), user_name, parent_id, Session.get('tree_id'), function(error, result){
+                        if ( result ) {
+                            Session.set('selected_file', parent_id);
+                        } else {
+                            Meteor.message.set(error.reason, 'warning');
+                            Meteor.navigate(Session.get('route'));
+                        }
+                    });
+
+                }
+            } else {
+                Meteor.message.set('User "' + user_name + '" does not exist.', 'warning');
+                Meteor.navigate(Session.get('route'));
+            }
+        });
     },
 
     /* TODO: Remove user */
