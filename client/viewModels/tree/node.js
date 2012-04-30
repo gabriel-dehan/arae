@@ -45,7 +45,9 @@ Template.node.shorten_name = function(name) {
 
 /**
  * Check if a user can edit a node (He has the tree_id or is admin)
+ * return {Boolean}
  */
+// TODO: Should refactor the user.name === admin;
 Template.node.user_can_edit = function() {
     var user = Session.get('user');
     if ( user ) {
@@ -55,14 +57,15 @@ Template.node.user_can_edit = function() {
 };
 
 /**
- * Check if user have rights for this node
+ * Check if user have rights for this node or if user is admin
  * @param node
  * @return {Boolean}
  */
+// TODO: Should refactor the user.name === admin;
 Template.node.collaborator_allowed_to_edit = function(node) {
     var user = Session.get('user');
     if ( user )
-        return _.contains(node.users, user.name);
+        return _.contains(node.users, user.name) || (user.name === 'admin');
 
     return false;
 };
