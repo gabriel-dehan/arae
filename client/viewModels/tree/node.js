@@ -54,6 +54,11 @@ Template.node.user_can_edit = function() {
     return false;
 };
 
+/**
+ * Check if user have rights for this node
+ * @param node
+ * @return {Boolean}
+ */
 Template.node.collaborator_allowed_to_edit = function(node) {
     var user = Session.get('user');
     if ( user )
