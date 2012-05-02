@@ -41,6 +41,17 @@ body {
     margin-right: 68px;
 }
 
+.nav-madewith {
+    padding: 0;
+}
+
+.navbar .nav-madewith a.madewith_badge {
+    margin-top: 4px;
+    margin-left: 25px;
+    position: relative;
+    padding: 0;
+}
+
 /* =TITLE */
 
 h1.page-header {
