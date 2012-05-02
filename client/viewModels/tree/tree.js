@@ -189,6 +189,8 @@ Template.tree.events = {
             }, 900, function() {
                 // We enable the editor mode, which will trigger the editor_mode on tree refresh
                 Session.set('enable_editor', true);
+                // Yet another hack to fullfill the textarea at first
+                Template.textarea.get_file(true);
                 if ( $('.markItUpHeader .preview').find('i').hasClass('icon-eye-close') ){
                     $('#editor-area').markItUpPreviewRefresh();
                 }

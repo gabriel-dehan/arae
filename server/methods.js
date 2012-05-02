@@ -45,7 +45,6 @@ Meteor.methods({
                 tree          : []
             }]);
             t_id = DocumentTree.insert({root: t.tree, count: t.count});
-            File.insert({tree:t_id, files:[]});
 
             if ( t_id ) {
                 /* Creates a new user */

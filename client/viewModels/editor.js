@@ -16,14 +16,14 @@ Template.editor.events = {
 //    $("#editor-area").markItUp(mySettings);
 //});
 
-Template.textarea.get_file = function() {
+Template.textarea.get_file = function(ret) {
     var content   = '';
     if ( Session.get('edited_file') ) {
         var file = File.findOne({ tree:Session.get('tree_id'), file_id:parseInt(Session.get('edited_file')) });
-        if ( file ) {
-            content = file.content;
+        if ( file && !ret ) {
+            $('#editor-area').val(file.content);
+        } else if ( file && ret ) {
+            return file.content;
         }
     }
-    $('#editor-area').val(content);
-//    return content;
 };
