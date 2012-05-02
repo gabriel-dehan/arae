@@ -1,9 +1,9 @@
 /**
- * Checks if the user is logged in
- * @return {boolean}
+ * Get's current user tree id
+ * @return {string}
  */
-Template.header.is_logged = function() {
-    return Session.get('user') !== undefined;
+Template.header.get_user_tree_id = function() {
+    return Session.get('user').tree_id;
 };
 
 /**

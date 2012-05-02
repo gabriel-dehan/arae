@@ -37,10 +37,11 @@ Template.login.events = {
             } else {
                 Meteor.message.set('You are now connected, ' + user.name + '.', 'info');
                 Session.set('user', user);
+                Session.set('display_help', true);
                 Meteor.navigate(Session.get('route'));
             }
         });
-    },
+    }
 };
 
 

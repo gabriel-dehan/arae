@@ -3,14 +3,24 @@
         <h1 class="title-tree">/</h1>
         {{#if is_owner}}<button class="btn btn-danger pull-right" id="delete-all">Delete all</button>{{/if}}
     </header>
-    <div class="tree well well-small">
+    <div class="tree well well-small {{#if editor_mode}}tree-edit{{/if}}">
         <ul id="root" class="nav nav nav-list">
             <li class="nav-header">DOCUMENTS</li>
             {{init}}
             {{> node}}
         </ul>
+        {{#if display_help}}
+        <div class="alert alert-info tree-help">
+          <button class="close" data-dismiss="alert">×</button>
+          <ul>
+              <li>Use drag & drop to move file or directories.</li>
+              <li>Click on a file to get more informations.</li>
+              <li>Double Click on a file to rename it.</li>
+          </ul>
+        </div>
+        {{/if}}
     </div>
-    <div class="document-infos well">
+    <div class="document-infos well" {{#unless editor_mode}}style="display:block;"{{/unless}}>
         <ul id="informations" class="nav nav nav-list">
             <li class="nav-header">INFORMATIONS</li>
             {{> doc_infos}}

@@ -11,3 +11,7 @@ Meteor.publish("_session", function() {
 Meteor.publish("document_tree", function() {
     return DocumentTree.find();
 });
+
+Meteor.publish("file", function() {
+    return File.find();
+});

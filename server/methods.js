@@ -45,6 +45,7 @@ Meteor.methods({
                 tree          : []
             }]);
             t_id = DocumentTree.insert({root: t.tree, count: t.count});
+            File.insert({tree:t_id, files:[]});
 
             if ( t_id ) {
                 /* Creates a new user */
@@ -99,6 +100,8 @@ Meteor.methods({
 
         if ( is_dir ) {
             node.tree = [];
+        } else {
+            File.insert({tree:tree_id, file_id:file_id, content:''});
         }
 
         if ( t.name_exists(node, dir_id) ) {
@@ -118,11 +121,16 @@ Meteor.methods({
      * @return {Boolean}
      */
     remove_in_dir: function(tree, node_id, tree_id) {
-        var t = new Tree(tree);
+        var t    = new Tree(tree),
+            node =  t.fetch_node(node_id);
 
         /* TODO: Test this feature */
-        if ( t.fetch_node(node_id).root ) {
+        if ( node.root ) {
             throw new Meteor.Error(200, 'Can\'t delete root directory');
+        } else {
+            if ( ! node.is_dir ) {
+                File.remove({tree:tree_id, file_id:node_id});
+            }
         }
 
         t.delete(node_id);

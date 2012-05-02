@@ -15,9 +15,12 @@
         TITLE
     	FILES
         EDIT
+            FILE EDIT
         RENAME
         DOCUMENT INFOS
         DRAG & DROP
+
+    EDITOR
 */
 
 /* =GENERAL */
@@ -228,6 +231,10 @@ h1.page-header {
     padding-bottom: 20px;
 }
 
+.tree-edit {
+    width: 26%;
+}
+
 .tree .nav > li:hover {
     text-decoration: none;
     background-color: #EEE;
@@ -255,6 +262,17 @@ h1.page-header {
 
 .tree .nav-header {
 	width: 100%;
+}
+.tree .tree-help {
+    margin-top: 25px;
+    padding-top: 18px;
+}
+
+.tree .alert .close {
+    border: none;
+    background: transparent;
+    margin-top: -15px;
+    margin-right: -11px;
 }
 
 /* ==TITLE */
@@ -299,12 +317,12 @@ h1.title-tree {
     padding-right: 5px;
 }
 
-.edit .rm-file, .edit .rm-dir, .edit .add-file, .edit .add-dir, .edit .add-user, .edit .remove-user {
+.edit .rm-file, .edit .rm-dir, .edit .add-file, .edit .add-dir, .edit .add-user, .edit .remove-user, .edit .edit-file {
     cursor: pointer;
     color: #08C;
 }
 
-.edit .rm-file:hover, .edit .rm-dir:hover, .edit .add-file:hover, .edit .add-dir:hover, .edit .add-user:hover {
+.edit .rm-file:hover, .edit .rm-dir:hover, .edit .add-file:hover, .edit .add-dir:hover, .edit .add-user:hover, .edit .edit-file:hover {
     color: #005580;
 }
 
@@ -314,6 +332,23 @@ h1.title-tree {
 
 .edit .rm-file:hover, .edit .rm-dir:hover, .edit .remove-user:hover {
     color: #DA4F49;
+}
+
+/* ==FILE EDIT */
+.action-edit .action-name {
+    display: none;
+}
+
+.action-edit {
+    margin-right: 0;
+}
+
+.action-edit li {
+    padding-left : 0;
+}
+
+.action-edit li i {
+    padding-right: 0;
 }
 
 /* ==RENAME */
@@ -357,6 +392,7 @@ h1.title-tree {
 
 /* ==DOCUMENT INFOS */
 .document-infos {
+    display: none;
     width: 200px;
     float: right;
     text-align: center;
@@ -418,4 +454,79 @@ h1.title-tree {
 }
 .dir-dragover {
     border-bottom: 1px dashed #666;
+}
+
+/* =EDITOR */
+#editor {
+    width: 68%;
+    display: none;
+    float: right;
+}
+#editor-area {
+    width: 97.5%;
+    height: 250px;
+    padding: 10px;
+}
+
+.editor-show {
+    display: block !important;
+}
+
+.icon-globe {
+	background-image:url(../img/markitup/sets/link.png);
+    background-position: -1px 0px;
+}
+
+.markItUpHeader {
+    width: 100.5%;
+}
+.markItUpHeader ul li.editor-mode-name {
+    float: right;
+    width: auto;
+    height: auto;
+}
+.markItUpHeader ul li.editor-mode-name a {
+    width: auto;
+    height: auto;
+}
+
+.markItUpContainer .markItUpHeader ul a {
+    width: 22px;
+    height: auto;
+    padding-top: 4px;
+}
+
+.markItUpHeader .markItUpInfos {
+    padding: 3px;
+    margin-left: 0;
+}
+
+.markItUpHeader .dropdown-menu {
+    min-width: 100%;
+}
+
+.dropdown-menu .markItUpButton {
+    width: 100%;
+}
+
+.dropdown-menu .markItUpButton a {
+    padding: 3px 15px;
+    color: #333;
+}
+
+.markItUpHeader ul .font-style a {
+    padding-top: 3px;
+    padding-left:7px;
+    padding-right:5px;
+}
+
+.markItUpHeader ul .font-style i {
+    padding-right: 10px;
+    padding-top: 3px;
+    margin-top: 1px;
+}
+
+.markItUpHeader ul .font-style a .caret {
+    margin-top: 8px;
+    margin-left: 3px;
 }

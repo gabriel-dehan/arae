@@ -1,0 +1,10 @@
+<template name="editor">
+    <div class="well {{#if editor_mode}}editor-show{{/if}}" id="editor">
+        {{#textarea}}
+        {{/textarea}}
+    </div>
+</template>
+
+<template name="textarea">
+    <textarea id="editor-area">{{get_file}}</textarea>
+</template>

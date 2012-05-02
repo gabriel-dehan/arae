@@ -5,17 +5,28 @@ var tree = null;
  * Reset the parsed tree
  */
 Template.tree.init = function(){
+    // If editor has been enabled, we trigger the editor_mode to display every node immediately
+    if ( Session.get('enable_editor') ) {
+        Session.set('editor_mode', true);
+    }
     tree = null;
 };
+
+Template.tree.display_help = function() {
+    if ( Session.get('display_help') ) {
+        return Session.get('display_help');
+    }
+}
 
 Template.tree.events = {
     /*
      * Add a file or directory
      */
     'click .add-file, click .add-dir' : function(e){
-        var parent_id = $(e.target).parent('ul.edit').attr('data-id'),
-        is_dir        = $(e.target).hasClass('add-dir'),
-        name          = '';
+        var target    = ( $(e.target).hasClass('add-file') || $(e.target).hasClass('add-dir') ) ? $(e.target) : $(e.target).parent('.add-file, .add-dir'),
+            parent_id = target.parent('ul.edit').attr('data-id'),
+            is_dir    = target.hasClass('add-dir'),
+            name      = '';
 
         if ( is_dir ) {
             name = prompt('Directory name (30 characters max)', 'New Directory');
@@ -38,9 +49,9 @@ Template.tree.events = {
     },
 
     'click .add-user, click .remove-user' : function(e){
-        var parent    = $(e.target).closest('.dir-name, .file-name'),
-            parent_id = $(e.target).parent('ul.edit').attr('data-id'),
-            target    = $(e.target);
+        var target    = ( $(e.target).hasClass('add-user') || $(e.target).hasClass('remove-user') ) ? $(e.target) : $(e.target).parent('.add-user, .remove-user'),
+            parent    = target.closest('.dir-name, .file-name'),
+            parent_id = target.parent('ul.edit').attr('data-id');
 
         $('#modal-save').on('click', function(e) {
             var user_name = $(e.target).closest('#modal').find('#select_user').val(),
@@ -75,7 +86,8 @@ Template.tree.events = {
      * Remove a file or directory
      */
     'click .rm-file, click .rm-dir' : function(e){
-        var node_id = $(e.target).parent('ul.edit').attr('data-id');
+        var target    = ( $(e.target).hasClass('rm-file') || $(e.target).hasClass('rm-dir') ) ? $(e.target) : $(e.target).parent('.rm-file, .rm-dir'),
+            node_id   = target.parent('ul.edit').attr('data-id');
 
         Meteor.call('remove_in_dir', Session.get('current_tree'), node_id, Session.get('tree_id'), function(error, result){
             if ( error ) {
@@ -99,6 +111,7 @@ Template.tree.events = {
             var self = target,
             id       = target.children('a').attr('href');
         } else {
+            e.preventDefault();
             var self = target.parent(),
             id       = target.attr('href');
         }
@@ -111,8 +124,9 @@ Template.tree.events = {
 
     /*
      * Rename a file
+     * TODO: Secure this and DnD so when you modify the HTML with some tool you can't access does features
      */
-    'dblclick .file-name a, dblclick .dir-name a': function(e) {
+    'dblclick .file-name a.allow-rename, dblclick .dir-name a.allow-rename': function(e) {
         var node_id = $(e.target).siblings('ul.edit').attr('data-id'),
             target  = $(e.target).hide(),
             field   = $('<input type="text" class="rename-field" value="' + target.text().trim().trim('/') + '"/>').appendTo(target.parent('li'));
@@ -154,5 +168,35 @@ Template.tree.events = {
                 Template.tree.init();
             }
         });
+    },
+
+    'click .edit-file' : function(e) {
+        var target    = ( $(e.target).hasClass('edit-file') ) ? $(e.target) : $(e.target).parent('.edit-file'),
+            node_id   = target.parent('ul.edit').attr('data-id');
+
+        // We hide document informations and then hide text from action buttons
+        $('.document-infos').fadeOut(500, function() {
+            $('.tree .edit li').each(function() {
+                var that = $(this);
+
+                /* Wrap text elements */
+                that.parent('ul.edit').addClass('action-edit');
+
+            });
+            Session.set('edited_file', node_id);
+            $('.tree').animate({
+                width: '26%'
+            }, 900, function() {
+                // We enable the editor mode, which will trigger the editor_mode on tree refresh
+                Session.set('enable_editor', true);
+                if ( $('.markItUpHeader .preview').find('i').hasClass('icon-eye-close') ){
+                    $('#editor-area').markItUpPreviewRefresh();
+                }
+            });
+        });
+    },
+
+    'click .tree-help .close': function() {
+        Session.set('display_help', false);
     }
 };

@@ -7,16 +7,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="#" data-link="internal">Wysiwyg</a>
+                <a class="brand" href="/user/list" data-link="internal">Arae Docs</a>
                 <div class="nav-collapse">
                     <ul class="nav">
-                        <li class="active"><a href="/user/list" data-link="internal">Home</a></li>
+                        <li><a href="/user/list" data-link="internal">Home</a></li>
+                        <li class="active"><a href="mailto:dehan.gabriel@gmail.com">Any bug you want to report ?</a></li>
                     </ul>
                 </div>
                 <div class="pull-right">
                     <ul class="nav" id="user-section {{#if is_logged}}logged{{/if}}">
                         {{#unless is_logged}}<li><a href="/user/register" data-link="internal">Register</a></li>{{/unless}}
                         {{#if is_logged}}
+                        <li><a href="/tree/id-{{get_user_tree_id}}" data-link="internal">{{user_name}}'s Documents</a></li>
                         <li class="connected">
                             <div class="logged" style="position: absolute;">
                                 <p class="informations">

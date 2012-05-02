@@ -29,6 +29,28 @@ Handlebars.registerHelper('is_admin', function() {
 });
 
 /**
+ * Checks if the user is logged in
+ * @return {boolean}
+ */
+Handlebars.registerHelper('is_logged', function() {
+    return Session.get('user') !== undefined;
+});
+
+Handlebars.registerHelper('editor_mode', function() {
+    if ( Session.get('editor_mode') )
+        return Session.get('editor_mode');
+    return false;
+});
+
+Handlebars.registerHelper('textarea', function(){
+    return Meteor.ui.chunk(function() {
+        Meteor.subscribe('file');
+        return Template['textarea']();
+    });
+});
+
+
+/**
  * Check if the user is the tree owner or the admin
  * @return {Boolean}
  */
